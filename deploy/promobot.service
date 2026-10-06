@@ -1,0 +1,18 @@
+# Serviço systemd para rodar o bot sem Docker.
+# Ajuste User e os caminhos e copie para /etc/systemd/system/promobot.service
+[Unit]
+Description=Bot de promocoes do Telegram
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=promobot
+WorkingDirectory=/opt/promobot
+EnvironmentFile=/opt/promobot/.env
+ExecStart=/opt/promobot/.venv/bin/python -m promobot
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
