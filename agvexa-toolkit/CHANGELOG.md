@@ -1,0 +1,25 @@
+# Changelog — AG Vexa Toolkit
+
+Formato baseado em "Keep a Changelog". Versões seguem SemVer.
+
+## [0.1.0-rc1] — 2026-10-14 — candidata para homologação
+
+### Adicionado
+- Arquitetura baseada em Ventoy 1.1.18, usando somente plugins oficiais
+  (`control`, `theme`, `menu_alias`, `menu_class`, `menu_tip`) e menu F6 (`ventoy_grub.cfg`).
+- Tema escuro **agvexa** (1024×768) e tema **agvexa-lite** (alternativo), 18 ícones originais,
+  papéis de parede 1024×768 e 1920×1080, gerador reproduzível (`scripts/build-theme-assets.py`).
+- Categorias 01–06 por pastas; pastas sem ISO ficam ocultas (comportamento nativo do Ventoy).
+- Catálogo de ferramentas (`catalog/ferramentas.yaml`) e manifesto de ISOs com fonte oficial e SHA‑256.
+- Scripts: `preflight.sh`, `validate-config.sh`, `verify-isos.sh`, `prepare-staging.sh`,
+  `test-boot.sh`, `novo-relatorio.sh` — todos com `--help`, códigos de saída e sem acesso a dispositivos.
+- Suíte de testes (`tests/run-all.sh`) com testes unitários e varredura estática de segurança.
+- AG Vexa Windows Optimizer: menu, diagnóstico, avaliação, aplicação com backup, reversão,
+  relatório; perfis Conservador, Desempenho e Personalizado; autoteste e testes Pester.
+- Documentação em português: arquitetura, instalação segura (Fase F), manual do técnico,
+  procedimentos de atendimento, compatibilidade, riscos, manutenção, licenças, segurança,
+  plano de testes, relatório de validação; modelos de relatório.
+
+### Pendente
+- Testes de boot em VM e hardware físico; testes do Optimizer em Windows; logo oficial;
+  download e verificação das ISOs reais; instalação no HD (Fase F).

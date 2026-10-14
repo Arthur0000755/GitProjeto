@@ -1,0 +1,150 @@
+{
+    "control": [
+        {
+            "VTOY_DEFAULT_MENU_MODE": "1"
+        },
+        {
+            "VTOY_TREE_VIEW_MENU_STYLE": "1"
+        },
+        {
+            "VTOY_DEFAULT_SEARCH_ROOT": "/ISO"
+        },
+        {
+            "VTOY_MENU_LANGUAGE": "pt_BR"
+        },
+        {
+            "VTOY_FILT_DOT_UNDERSCORE_FILE": "1"
+        },
+        {
+            "VTOY_SECURE_BOOT_POLICY": "1"
+        },
+        {
+            "VTOY_WIN11_BYPASS_CHECK": "0"
+        },
+        {
+            "VTOY_WIN11_BYPASS_NRO": "0"
+        }
+    ],
+    "theme": {
+        "file": [
+            "/ventoy/themes/agvexa/theme.txt",
+            "/ventoy/themes/agvexa-lite/theme.txt"
+        ],
+        "default_file": 1,
+        "gfxmode": "1024x768",
+        "display_mode": "GUI"
+    },
+    "menu_alias": [
+        {
+            "dir": "/ISO/01-instalacao-sistemas",
+            "alias": "01 — Instalação de Sistemas"
+        },
+        {
+            "dir": "/ISO/02-diagnostico-hardware",
+            "alias": "02 — Diagnóstico de Hardware"
+        },
+        {
+            "dir": "/ISO/03-manutencao-discos",
+            "alias": "03 — Manutenção de Discos"
+        },
+        {
+            "dir": "/ISO/04-backup-recuperacao",
+            "alias": "04 — Backup e Recuperação"
+        },
+        {
+            "dir": "/ISO/05-linux-live",
+            "alias": "05 — Ambientes Linux Live"
+        },
+        {
+            "dir": "/ISO/06-ferramentas-avancadas",
+            "alias": "06 — Ferramentas Avançadas"
+        }
+    ],
+    "menu_class": [
+        {
+            "dir": "/ISO/01-instalacao-sistemas",
+            "class": "agv-instalacao"
+        },
+        {
+            "parent": "/ISO/01-instalacao-sistemas",
+            "class": "agv-instalacao"
+        },
+        {
+            "dir": "/ISO/02-diagnostico-hardware",
+            "class": "agv-hardware"
+        },
+        {
+            "parent": "/ISO/02-diagnostico-hardware",
+            "class": "agv-hardware"
+        },
+        {
+            "dir": "/ISO/03-manutencao-discos",
+            "class": "agv-discos"
+        },
+        {
+            "parent": "/ISO/03-manutencao-discos",
+            "class": "agv-discos"
+        },
+        {
+            "dir": "/ISO/04-backup-recuperacao",
+            "class": "agv-backup"
+        },
+        {
+            "parent": "/ISO/04-backup-recuperacao",
+            "class": "agv-backup"
+        },
+        {
+            "dir": "/ISO/05-linux-live",
+            "class": "agv-linux"
+        },
+        {
+            "parent": "/ISO/05-linux-live",
+            "class": "agv-linux"
+        },
+        {
+            "dir": "/ISO/06-ferramentas-avancadas",
+            "class": "agv-avancado"
+        },
+        {
+            "parent": "/ISO/06-ferramentas-avancadas",
+            "class": "agv-avancado"
+        }
+    ],
+    "menu_tip": {
+        "left": "5.5%",
+        "top": "83%",
+        "color": "#94A3B8",
+        "tips": [
+            {
+                "dir": "/ISO/01-instalacao-sistemas",
+                "tip1": "Instaladores oficiais de sistemas. Use somente ISOs verificadas.",
+                "tip2": "Instalar pode apagar dados: confirme autorização, backup e disco de destino."
+            },
+            {
+                "dir": "/ISO/02-diagnostico-hardware",
+                "tip1": "Testes não destrutivos de memória RAM e componentes.",
+                "tip2": "Testes longos aquecem o equipamento: acompanhe temperatura e ventilação."
+            },
+            {
+                "dir": "/ISO/03-manutencao-discos",
+                "tip1": "Partições, sistemas de arquivos e saúde SMART de HDs e SSDs.",
+                "tip2": "Alterar partições pode apagar dados. Diagnostique antes, repare depois do backup."
+            },
+            {
+                "dir": "/ISO/04-backup-recuperacao",
+                "tip1": "Imagens de disco, clonagem e recuperação de arquivos.",
+                "tip2": "Nunca grave no disco de origem. Identifique origem e destino pelo modelo e série."
+            },
+            {
+                "dir": "/ISO/05-linux-live",
+                "tip1": "Sistemas completos sem instalar: diagnóstico, rede e resgate.",
+                "tip2": "Não altera o computador, a menos que você execute uma ação de escrita."
+            },
+            {
+                "dir": "/ISO/06-ferramentas-avancadas",
+                "tip1": "Ferramentas para técnicos experientes, em geral em modo texto.",
+                "tip2": "Leia o Manual do Técnico antes de usar. Na dúvida, não prossiga."
+            }
+        ]
+    }
+}

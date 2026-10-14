@@ -1,0 +1,15 @@
+AG VEXA TOOLKIT - PASTA DE IMAGENS
+
+As imagens ficam em subpastas de categoria. Cada pasta só aparece no
+menu de boot quando contém ao menos uma imagem (.iso/.img).
+
+  01-instalacao-sistemas   Windows 11, Windows 10 (fim de suporte), outros
+  02-diagnostico-hardware  MemTest86+
+  03-manutencao-discos     GParted Live
+  04-backup-recuperacao    Rescuezilla
+  05-linux-live            SystemRescue, Ubuntu Desktop
+  06-ferramentas-avancadas Clonezilla Live
+
+Somente adicione imagens baixadas da fonte oficial e conferidas pelo
+SHA-256 (scripts/verify-isos.sh no projeto). Atualize também o
+manifesto catalog/isos-manifest.json e gere o staging novamente.

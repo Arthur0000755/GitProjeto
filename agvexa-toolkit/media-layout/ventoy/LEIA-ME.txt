@@ -1,0 +1,8 @@
+Pasta de configuração do Ventoy (nome obrigatório em minúsculas).
+
+  ventoy.json      Gerado por scripts/prepare-staging.sh. Não edite à mão.
+  ventoy_grub.cfg  Menu F6 do AG Vexa (informações e segurança).
+  themes/          Temas agvexa (padrão) e agvexa-lite (alternativo).
+
+Para verificar a configuração no próprio boot: F5 > verificar
+configuração do plugin json (recurso do Ventoy).

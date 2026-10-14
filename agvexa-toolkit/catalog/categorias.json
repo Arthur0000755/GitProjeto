@@ -1,0 +1,48 @@
+{
+  "_comentario": "Categorias do menu do AG Vexa Toolkit. Fonte única para gerar ventoy/ventoy.json (menu_alias, menu_class, menu_tip). Após editar, rode: scripts/prepare-staging.sh --rebuild-base",
+  "raiz_iso": "/ISO",
+  "categorias": [
+    {
+      "id": "01-instalacao-sistemas",
+      "alias": "01 — Instalação de Sistemas",
+      "classe": "agv-instalacao",
+      "dica1": "Instaladores oficiais de sistemas. Use somente ISOs verificadas.",
+      "dica2": "Instalar pode apagar dados: confirme autorização, backup e disco de destino."
+    },
+    {
+      "id": "02-diagnostico-hardware",
+      "alias": "02 — Diagnóstico de Hardware",
+      "classe": "agv-hardware",
+      "dica1": "Testes não destrutivos de memória RAM e componentes.",
+      "dica2": "Testes longos aquecem o equipamento: acompanhe temperatura e ventilação."
+    },
+    {
+      "id": "03-manutencao-discos",
+      "alias": "03 — Manutenção de Discos",
+      "classe": "agv-discos",
+      "dica1": "Partições, sistemas de arquivos e saúde SMART de HDs e SSDs.",
+      "dica2": "Alterar partições pode apagar dados. Diagnostique antes, repare depois do backup."
+    },
+    {
+      "id": "04-backup-recuperacao",
+      "alias": "04 — Backup e Recuperação",
+      "classe": "agv-backup",
+      "dica1": "Imagens de disco, clonagem e recuperação de arquivos.",
+      "dica2": "Nunca grave no disco de origem. Identifique origem e destino pelo modelo e série."
+    },
+    {
+      "id": "05-linux-live",
+      "alias": "05 — Ambientes Linux Live",
+      "classe": "agv-linux",
+      "dica1": "Sistemas completos sem instalar: diagnóstico, rede e resgate.",
+      "dica2": "Não altera o computador, a menos que você execute uma ação de escrita."
+    },
+    {
+      "id": "06-ferramentas-avancadas",
+      "alias": "06 — Ferramentas Avançadas",
+      "classe": "agv-avancado",
+      "dica1": "Ferramentas para técnicos experientes, em geral em modo texto.",
+      "dica2": "Leia o Manual do Técnico antes de usar. Na dúvida, não prossiga."
+    }
+  ]
+}

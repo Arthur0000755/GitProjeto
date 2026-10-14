@@ -1,0 +1,17 @@
+{
+  "_comentario": "Paleta oficial do AG Vexa Toolkit. Fonte única para o gerador de imagens (scripts/build-theme-assets.py) e para a documentação. Os valores de theme.txt devem corresponder a estes.",
+  "fundo_principal": "#0B1220",
+  "fundo_secundario": "#111C30",
+  "fundo_painel": "#0F1A2E",
+  "borda": "#1E3A5F",
+  "borda_suave": "#1E293B",
+  "azul_destaque": "#38BDF8",
+  "azul_secundario": "#2563EB",
+  "azul_icone": "#7DD3FC",
+  "texto_principal": "#F8FAFC",
+  "texto_menu": "#E2E8F0",
+  "texto_secundario": "#94A3B8",
+  "alerta": "#F59E0B",
+  "erro": "#EF4444",
+  "sucesso": "#22C55E"
+}
