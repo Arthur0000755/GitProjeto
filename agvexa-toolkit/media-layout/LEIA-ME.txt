@@ -13,6 +13,12 @@ ESTRUTURA DESTA PARTIÇÃO
               O nome "ventoy" deve permanecer em minúsculas.
   AGVexa/     Documentação, modelos de relatório, catálogo de
               ferramentas e o AG Vexa Windows Optimizer.
+  DRIVERS/       Drivers oficiais por fabricante/modelo.
+  INSTALADORES/  Instaladores oficiais de programas pedidos pelo cliente.
+  FERRAMENTAS/   Utilitários portáteis para uso com o Windows aberto.
+  BIOS_FIRMWARE/ Atualizações de BIOS/firmware (operação de alto risco).
+              Estas quatro pastas não aparecem no menu de boot. Leia o
+              LEIA-ME e mantenha o INVENTARIO.csv de cada uma.
   SHA256SUMS-AGVEXA.txt
               Somas de verificação de todos os arquivos copiados.
 
@@ -30,6 +36,8 @@ REGRAS DE SEGURANÇA (resumo)
   - Identifique origem e destino pelo modelo, série e capacidade.
   - Diagnóstico primeiro, sempre em modo leitura.
   - Não contorne senhas nem criptografia de clientes.
+  - NÃO guarde dados de clientes neste HD (não existe pasta CLIENTES).
+    Use o disco/partição criptografada da AG Vexa.
 
 ATUALIZAÇÃO
   Não edite arquivos diretamente neste HD. As alterações são feitas no

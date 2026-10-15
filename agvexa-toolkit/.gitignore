@@ -17,6 +17,10 @@
 *.xz
 *.zst
 
+# Arquivos reais das pastas de apoio (drivers, instaladores...), fora do Git
+extras/*
+!extras/LEIA-ME.md
+
 # Biblioteca local de ISOs (fora do Git, apenas o LEIA-ME)
 isos/*
 !isos/LEIA-ME.md

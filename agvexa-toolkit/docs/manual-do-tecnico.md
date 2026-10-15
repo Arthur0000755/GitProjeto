@@ -57,6 +57,9 @@ Ordem segura em casos de dados importantes: **imagem (ou ddrescue) → trabalhar
 5. **F6**: informações do toolkit, regras de segurança, identificação rápida do computador, reiniciar/desligar.
 6. **F5**: ferramentas do Ventoy — trocar tema (*Seleção de Tema* → AG Vexa leve), resolução, **modo texto** se a tela falhar, informações de hardware.
 7. **F4**: iniciar o sistema instalado no computador (sem usar o toolkit).
+8. Com o Windows aberto, o HD mostra as pastas `DRIVERS`, `INSTALADORES`, `FERRAMENTAS` e
+   `BIOS_FIRMWARE`. Leia o `LEIA-ME.txt` de cada uma antes de usar; confira a origem no
+   `INVENTARIO.csv`. **Não grave dados de clientes no HD do toolkit.**
 
 Se aparecer o **MokManager** (tela azul) com Secure Boot ativo, leia `compatibilidade.md` antes de prosseguir: registrar chaves altera o firmware do cliente.
 

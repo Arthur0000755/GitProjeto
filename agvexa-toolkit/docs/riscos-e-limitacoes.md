@@ -27,7 +27,7 @@
 | Dados pessoais de clientes em relatórios/mídia | média | alta | relatórios sem identificadores por padrão; prazo de guarda e exclusão no checklist de entrega |
 | Boot automático indesejado | baixa | alta | sem timeout/imagem padrão; validador recusa |
 | Otimização mal aplicada no Windows | baixa | média | padrão análise; backup; confirmação digitada; reversão verificada |
-| HD do toolkit perdido/roubado | baixa | média | não guardar dados de clientes no HD do toolkit além do necessário e por prazo curto |
+| HD do toolkit perdido/roubado | baixa | média | sem pasta CLIENTES na mídia (staging e validador recusam); dados de clientes só em disco/partição criptografada separada, por prazo curto |
 
 ## 3. Riscos do projeto / terceiros
 

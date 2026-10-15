@@ -1,0 +1,18 @@
+AG VEXA TOOLKIT - INSTALADORES
+=====================================================================
+Instaladores de programas que o cliente pediu (navegador, leitor de PDF,
+pacote de escritório gratuito, compactador...). Usados com o Windows
+aberto. Esta pasta NÃO aparece no menu de boot.
+
+ORGANIZAÇÃO
+  INSTALADORES/<Programa>/<Programa>_<versão>_<arquitetura>.exe|.msi
+
+REGRAS
+  1. Somente instaladores OFICIAIS, baixados do site do desenvolvedor.
+  2. Nada de versões "crackeadas", ativadores ou "pacotes" de sites de
+     terceiros: além de ilegais, são a principal origem de vírus.
+  3. Software pago só com licença do cliente.
+  4. Registre cada arquivo no INVENTARIO.csv (origem, versão, SHA-256).
+  5. Instale apenas o que o cliente pediu; recuse barras e ofertas extras
+     durante a instalação.
+  6. Revise as versões a cada mês: instalador velho = falhas de segurança.

@@ -5,6 +5,10 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 ## [Não lançado]
 
 ### Adicionado
+- Pastas de apoio na raiz da mídia: `DRIVERS`, `INSTALADORES`, `FERRAMENTAS`, `BIOS_FIRMWARE`,
+  com LEIA-ME de regras e `INVENTARIO.csv`; arquivos reais vêm de `extras/` (fora do Git).
+- Staging e validador recusam pasta `CLIENTES`; procedimento de partição criptografada
+  separada para dados de clientes (`docs/instalacao-segura.md`, seção 10).
 - Logomarca oficial da AG Vexa (`branding/logo/agvexa-logo.png`) no fundo do tema do boot,
   nos papéis de parede e no relatório HTML do Windows Optimizer.
 

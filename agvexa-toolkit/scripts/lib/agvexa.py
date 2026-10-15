@@ -927,7 +927,9 @@ REQUIRED_PATHS = [
     "ventoy/ventoy.json", "ventoy/ventoy_grub.cfg",
     "ventoy/themes/agvexa/theme.txt", "ventoy/themes/agvexa-lite/theme.txt",
     "catalog/categorias.json", "catalog/ferramentas.yaml", "catalog/isos-manifest.example.json",
-    "media-layout/LEIA-ME.txt", "media-layout/AGVexa/.ventoyignore",
+    "media-layout/LEIA-ME.txt", "media-layout/AGVexa/.ventoyignore", "extras/LEIA-ME.md",
+    "media-layout/DRIVERS/LEIA-ME.txt", "media-layout/INSTALADORES/LEIA-ME.txt",
+    "media-layout/FERRAMENTAS/LEIA-ME.txt", "media-layout/BIOS_FIRMWARE/LEIA-ME.txt",
     "scripts/preflight.sh", "scripts/validate-config.sh", "scripts/verify-isos.sh",
     "scripts/prepare-staging.sh", "scripts/test-boot.sh",
     "templates/relatorios",
@@ -1025,8 +1027,13 @@ def validate_staging(staging, report):
     for t in THEMES:
         validate_theme(os.path.join(staging, "ventoy", "themes", t, "theme.txt"), report, read_version())
     validate_f6(os.path.join(staging, "ventoy", "ventoy_grub.cfg"), report, read_version())
+    for folder in EXTRA_FOLDERS:
+        if not os.path.isfile(os.path.join(staging, folder, "LEIA-ME.txt")):
+            report.error("pasta de apoio sem LEIA-ME: %s" % folder)
     # o Ventoy exige 'ventoy' e 'ventoy.json' em minúsculas
     for name in os.listdir(staging):
+        if name.upper() in FORBIDDEN_MEDIA_FOLDERS:
+            report.error("pasta %s não pode existir na mídia do toolkit (dados de clientes)" % name)
         if name.lower() == "ventoy" and name != "ventoy":
             report.error("diretório deve ser 'ventoy' em minúsculas, encontrado '%s'" % name)
     sums = os.path.join(staging, "SHA256SUMS-AGVEXA.txt")
@@ -1055,6 +1062,40 @@ def validate_staging(staging, report):
 
 STAGING_BASE = os.path.join(ROOT, "build")
 MARKER = ".agvexa-staging"
+
+# Pastas de apoio usadas com o Windows aberto (fora do menu de boot). O
+# conteúdo real fica em extras/<PASTA>/ no projeto (fora do Git) e é levado
+# para a raiz da mídia pelo staging. Ver media-layout/<PASTA>/LEIA-ME.txt.
+EXTRA_FOLDERS = ("BIOS_FIRMWARE", "DRIVERS", "FERRAMENTAS", "INSTALADORES")
+EXTRAS_DIR = os.path.join(ROOT, "extras")
+# Dados de clientes nunca vão para a mídia do toolkit (docs/instalacao-segura.md, §10).
+FORBIDDEN_MEDIA_FOLDERS = ("CLIENTES",)
+
+
+def plan_extras(extras_dir):
+    """Lista (origem, caminho relativo na mídia) dos arquivos de extras/. Lança ValueError
+    se houver pasta proibida (ex.: CLIENTES)."""
+    plan, ignored = [], []
+    if not os.path.isdir(extras_dir):
+        return plan, ignored
+    for name in sorted(os.listdir(extras_dir)):
+        src_dir = os.path.join(extras_dir, name)
+        if not os.path.isdir(src_dir):
+            continue
+        if name.upper() in FORBIDDEN_MEDIA_FOLDERS:
+            raise ValueError("extras/%s não pode ir para a mídia: dados de clientes ficam em partição "
+                             "criptografada separada (docs/instalacao-segura.md)" % name)
+        if name not in EXTRA_FOLDERS:
+            ignored.append(name)
+            continue
+        for dirpath, dirs, files in os.walk(src_dir):
+            dirs[:] = sorted(d for d in dirs if not d.startswith("."))
+            for f in sorted(files):
+                if f.startswith(".") or f.startswith("._"):
+                    continue
+                full = os.path.join(dirpath, f)
+                plan.append((full, os.path.join(name, os.path.relpath(full, src_dir))))
+    return plan, ignored
 
 
 def safe_staging_dir(path):
@@ -1106,6 +1147,13 @@ def cmd_stage(args):
     print("AG Vexa Toolkit %s - preparação de staging%s" % (version, " [DRY-RUN]" if dry else ""))
     print("  destino: %s" % out)
     print("  modo das ISOs: %s" % args.iso_mode)
+
+    # 0) conferir extras/ antes de tocar no staging (recusa CLIENTES etc.)
+    try:
+        extra_plan, extra_ignored = plan_extras(args.extras)
+    except ValueError as exc:
+        print("ERRO: %s" % exc)
+        return EXIT_ERROR
 
     # 1) ISOs: só entram as verificadas (ou não verificadas com --allow-unverified)
     images = []
@@ -1174,6 +1222,25 @@ def cmd_stage(args):
             os.makedirs(os.path.join(out, "AGVexa"), exist_ok=True)
             shutil.copy2(os.path.join(ROOT, f), os.path.join(out, "AGVexa", f))
 
+    # 3b) pastas de apoio (drivers, instaladores, ferramentas, BIOS/firmware)
+    extra_mode = "copy" if args.iso_mode == "copy" else ("link" if args.iso_mode == "link" else "none")
+    print("[3b] Pastas de apoio: %d arquivo(s) de %s (%s)" % (len(extra_plan), rel(args.extras), extra_mode))
+    for name in extra_ignored:
+        print("    AVISO: extras/%s ignorada (pastas aceitas: %s)" % (name, ", ".join(EXTRA_FOLDERS)))
+    if extra_mode != "none":
+        for src, relpath in extra_plan:
+            dst = os.path.join(out, relpath)
+            actions.append((extra_mode, rel(src), dst))
+            if dry:
+                continue
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            if os.path.lexists(dst):   # ex.: INVENTARIO.csv real substitui o modelo vazio
+                os.remove(dst)
+            if extra_mode == "copy":
+                shutil.copy2(src, dst)
+            else:
+                os.symlink(os.path.realpath(src), dst)
+
     # 4) ISOs
     print("[4] ISOs (%s)" % args.iso_mode)
     for src, dst in iso_plan:
@@ -1200,6 +1267,7 @@ def cmd_stage(args):
     iso_sha = {img["path"].lstrip("/"): img["sha256"] for img in images}
     if not dry:
         lines = []
+        hash_cache = {}
         for dirpath, dirs, files in os.walk(out):
             dirs.sort()
             for f in sorted(files):
@@ -1209,8 +1277,7 @@ def cmd_stage(args):
                     continue
                 digest = iso_sha.get(name)
                 if digest is None:
-                    with open(p, "rb") as fh:
-                        digest = hashlib.sha256(fh.read()).hexdigest()
+                    digest, _ = sha256_file(p, hash_cache)
                 lines.append("%s  %s\n" % (digest, name))
         with open(os.path.join(out, "SHA256SUMS-AGVEXA.txt"), "w", encoding="utf-8", newline="\n") as fh:
             fh.writelines(lines)
@@ -1225,7 +1292,7 @@ def cmd_stage(args):
         print("\nStaging pronto em %s" % rel(out))
         print("Próximo passo: scripts/validate-config.sh --staging %s" % rel(out))
         if args.iso_mode == "link":
-            print("Atenção: as ISOs são links simbólicos. Ao copiar para o HD (exFAT), use cópia que")
+            print("Atenção: ISOs e arquivos de extras/ são links simbólicos. Ao copiar para o HD (exFAT), use cópia que")
             print("siga links (ex.: rsync -rL ou cp -rL). Veja docs/instalacao-segura.md.")
     return EXIT_OK
 
@@ -1259,6 +1326,7 @@ def main(argv=None):
     p.add_argument("--manifest", default=os.path.join(ROOT, "catalog", "isos-manifest.json"))
     p.add_argument("--library", default=os.path.join(ROOT, "isos"))
     p.add_argument("--iso-mode", choices=("link", "copy", "none"), default="link")
+    p.add_argument("--extras", default=EXTRAS_DIR)
     p.add_argument("--allow-unverified", action="store_true")
     p.add_argument("--ascii-menu", action="store_true")
     p.add_argument("--dry-run", action="store_true")

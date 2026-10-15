@@ -14,19 +14,25 @@ dados do HD Ventoy:
   ventoy/ventoy_grub.cfg  menu F6
   ventoy/themes/          temas agvexa e agvexa-lite
   AGVexa/                 documentação, modelos, Windows Optimizer, catálogo
+  DRIVERS/ INSTALADORES/ FERRAMENTAS/ BIOS_FIRMWARE/
+                          pastas de apoio (uso com o Windows aberto): LEIA-ME,
+                          INVENTARIO.csv e os arquivos de extras/<PASTA>/
   SHA256SUMS-AGVEXA.txt   somas para conferência após a cópia
 
 Segurança:
   - trabalha SOMENTE em diretórios comuns dentro de build/ do projeto;
   - recusa /dev, pontos de montagem, links simbólicos e diretórios que
     não tenham sido criados por este script (marcador .agvexa-staging);
-  - não acessa discos, não formata, não instala Ventoy.
+  - não acessa discos, não formata, não instala Ventoy;
+  - recusa extras/CLIENTES: dados de clientes nunca vão para a mídia.
 
 Opções:
   --output DIR          destino dentro de build/ (padrão: build/staging)
   --manifest ARQ        manifesto (padrão: catalog/isos-manifest.json)
   --library DIR         biblioteca de ISOs (padrão: isos/)
+  --extras DIR          arquivos das pastas de apoio (padrão: extras/)
   --iso-mode MODO       link (padrão, não duplica espaço) | copy | none
+                        (vale também para os arquivos de extras/)
   --allow-unverified    inclui ISOs sem checksum oficial, marcadas
                         "[NÃO VERIFICADA]" no menu (use com critério)
   --ascii-menu          nomes do menu sem acentos (útil se usar modo texto)
@@ -46,7 +52,7 @@ DRY=0
 while [ $# -gt 0 ]; do
     case "$1" in
         -h|--help) usage; exit 0 ;;
-        --output|--manifest|--library)
+        --output|--manifest|--library|--extras)
             [ $# -ge 2 ] || agv_die_usage "$1 exige um valor"
             agv_refuse_device_path "$2"
             ARGS+=("$1" "$2"); shift ;;

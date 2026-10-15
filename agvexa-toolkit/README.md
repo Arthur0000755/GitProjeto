@@ -45,6 +45,11 @@ F6 — Informações do Toolkit, regras de segurança, identificação, reinicia
 F5 — Tema leve, resolução, modo texto (recursos do Ventoy)
 ```
 
+Na raiz do HD também ficam as pastas de apoio para usar com o Windows aberto:
+`DRIVERS`, `INSTALADORES`, `FERRAMENTAS` e `BIOS_FIRMWARE` (cada uma com LEIA-ME e
+`INVENTARIO.csv`). Dados de clientes **não** ficam no HD do toolkit: ver
+[`docs/instalacao-segura.md`](docs/instalacao-segura.md), seção 10.
+
 Categorias sem ferramenta instalada **não aparecem**. Só ISOs com SHA‑256 oficial
 conferido entram por padrão.
 
@@ -61,6 +66,7 @@ conferido entram por padrão.
 | `templates/relatorios/` | diagnóstico, checklists, testes finais, entrega |
 | `windows-optimizer/` | AG Vexa Windows Optimizer (PowerShell 5.1+) |
 | `tests/` | testes automatizados |
+| `extras/` | arquivos reais de DRIVERS, INSTALADORES, FERRAMENTAS e BIOS_FIRMWARE (**fora do Git**) |
 | `isos/`, `build/`, `reports/` | locais, **fora do Git** |
 
 ## Documentos principais

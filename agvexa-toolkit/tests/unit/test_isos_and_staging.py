@@ -142,6 +142,12 @@ class StagingTests(unittest.TestCase):
         with open(self.man, "w", encoding="utf-8") as fh:
             json.dump({"schema": "agvexa-isos-manifest/1", "itens": items}, fh, ensure_ascii=False)
         self.bad_hash = sha(bad)
+        self.extras = os.path.join(self.tmp, "extras")
+        os.makedirs(os.path.join(self.extras, "DRIVERS", "Lenovo"))
+        with open(os.path.join(self.extras, "DRIVERS", "Lenovo", "wifi_1.0.exe"), "wb") as fh:
+            fh.write(b"driver de teste")
+        with open(os.path.join(self.extras, "DRIVERS", "INVENTARIO.csv"), "w", encoding="utf-8") as fh:
+            fh.write("arquivo;origem\nwifi_1.0.exe;https://pcsupport.lenovo.com\n")
 
     def tearDown(self):
         shutil.rmtree(self.tmp)
@@ -149,7 +155,8 @@ class StagingTests(unittest.TestCase):
             shutil.rmtree(self.out)
 
     def stage(self, **kw):
-        args = argparse.Namespace(output=self.out, manifest=self.man, library=self.lib, iso_mode="copy",
+        args = argparse.Namespace(output=self.out, manifest=self.man, library=self.lib, extras=self.extras,
+                                  iso_mode="copy",
                                   allow_unverified=False, ascii_menu=False, dry_run=False, verbose=False)
         for k, v in kw.items():
             setattr(args, k, v)
@@ -237,6 +244,48 @@ class StagingTests(unittest.TestCase):
             if os.path.islink(self.out):
                 os.unlink(self.out)
             shutil.rmtree(target)
+
+    def test_support_folders_present(self):
+        self.assertEqual(self.stage(iso_mode="none"), 0)
+        for folder in agvexa.EXTRA_FOLDERS:
+            for f in ("LEIA-ME.txt", "INVENTARIO.csv", ".ventoyignore"):
+                self.assertTrue(os.path.isfile(os.path.join(self.out, folder, f)), (folder, f))
+        self.assertFalse(os.path.exists(os.path.join(self.out, "DRIVERS", "Lenovo")))  # none = sem arquivos
+
+    def test_extras_copied_and_inventory_replaced(self):
+        self.assertEqual(self.stage(), 0)
+        drv = os.path.join(self.out, "DRIVERS", "Lenovo", "wifi_1.0.exe")
+        self.assertTrue(os.path.isfile(drv) and not os.path.islink(drv))
+        inv = open(os.path.join(self.out, "DRIVERS", "INVENTARIO.csv"), encoding="utf-8").read()
+        self.assertIn("lenovo.com", inv)
+        sums = open(os.path.join(self.out, "SHA256SUMS-AGVEXA.txt"), encoding="utf-8").read()
+        self.assertIn("DRIVERS/Lenovo/wifi_1.0.exe", sums)
+        r = quiet_report()
+        agvexa.validate_staging(self.out, r)
+        self.assertEqual(r.errors, [])
+
+    def test_extras_linked_in_link_mode(self):
+        self.assertEqual(self.stage(iso_mode="link"), 0)
+        self.assertTrue(os.path.islink(os.path.join(self.out, "DRIVERS", "Lenovo", "wifi_1.0.exe")))
+
+    def test_clientes_folder_refused_before_writing(self):
+        os.makedirs(os.path.join(self.extras, "Clientes", "OS-123"))
+        open(os.path.join(self.extras, "Clientes", "OS-123", "dados.txt"), "w").write("x")
+        self.assertEqual(self.stage(), agvexa.EXIT_ERROR)
+        self.assertFalse(os.path.exists(self.out))
+
+    def test_unknown_extras_folder_ignored(self):
+        os.makedirs(os.path.join(self.extras, "Musicas"))
+        open(os.path.join(self.extras, "Musicas", "a.mp3"), "w").write("x")
+        self.assertEqual(self.stage(), 0)
+        self.assertFalse(os.path.exists(os.path.join(self.out, "Musicas")))
+
+    def test_validate_staging_rejects_clientes(self):
+        self.stage()
+        os.makedirs(os.path.join(self.out, "CLIENTES"))
+        r = quiet_report()
+        agvexa.validate_staging(self.out, r)
+        self.assertTrue(any("CLIENTES" in e for e in r.errors))
 
     def test_ascii_menu_staging(self):
         self.stage(ascii_menu=True)

@@ -1,0 +1,20 @@
+AG VEXA TOOLKIT - FERRAMENTAS (Windows)
+=====================================================================
+Utilitários portáteis para diagnóstico com o Windows aberto (ex.:
+identificação de hardware, saúde de disco, teste de memória do Windows).
+Esta pasta NÃO aparece no menu de boot.
+
+ORGANIZAÇÃO
+  FERRAMENTAS/<Ferramenta>/<Ferramenta>_<versão>/
+
+REGRAS
+  1. Somente versões portáteis oficiais, do site do desenvolvedor.
+  2. Prefira ferramentas de LEITURA (diagnóstico). Ferramentas que
+     alteram o sistema seguem as mesmas regras do Manual do Técnico:
+     autorização, backup, confirmação.
+  3. Nada de "otimizadores", "limpadores de registro" ou ferramentas
+     que desativem proteções do Windows.
+  4. Registre cada ferramenta no INVENTARIO.csv (origem, versão, licença
+     nas observações, SHA-256).
+  5. Confira a licença: algumas são grátis só para uso pessoal, não para
+     uso comercial em assistência técnica.

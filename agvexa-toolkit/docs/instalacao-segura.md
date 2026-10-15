@@ -64,7 +64,7 @@ udisksctl unmount -b /dev/sdX1     # exemplo; confira o nome
 |---|---|---|
 | Estilo de partição | **MBR** (padrão do Ventoy) | 1 TB < 2 TB (limite do MBR) e máxima compatibilidade com BIOS antigos. Use `-g` (GPT) só se algum equipamento-alvo exigir. |
 | Secure Boot | **habilitado** (`-s`, padrão) | permite boot com Secure Boot ativo após registrar a chave (MokManager). |
-| Reserva de espaço | não usar no início | `-r <MiB>` reserva espaço no fim do disco; só se for criar partição extra planejada. |
+| Reserva de espaço | **decidir agora** | `-r <MiB>` reserva espaço no fim do disco para uma partição criptografada de dados de clientes (seção 10). Só é possível na instalação: mudar depois exige reinstalar o Ventoy (apaga tudo). |
 | Instalação "não destrutiva" (`-n`) | **não usar** | recurso de tentativa; o procedimento assume perda total. |
 | Rótulo | `-L AGVEXA` | identifica a partição de dados. |
 
@@ -130,6 +130,25 @@ cd ~ && udisksctl unmount -b /dev/disk/by-label/AGVEXA && udisksctl power-off -b
 3. No menu, `F5 > verificar configuração do plugin json` confere o `ventoy.json`
    na própria máquina.
 4. Registre os resultados em `relatorio-de-validacao.md`.
+
+## 10. Dados de clientes (partição criptografada separada)
+
+A mídia do toolkit **não tem pasta CLIENTES** e o staging recusa uma. O HD
+circula por casas e empresas; se for perdido, nada de cliente pode estar legível.
+
+Opções, da mais segura para a menos:
+
+| Opção | Como | Observações |
+|---|---|---|
+| **A. HD separado só para backups de clientes** (recomendado) | outro HD externo, inteiro criptografado (BitLocker To Go no Windows Pro, ou VeraCrypt) | não depende do Ventoy; se um HD for perdido, o outro continua seguro |
+| **B. Partição reservada no mesmo HD** | instalar o Ventoy com `-r <MiB>` (ex.: `-r 409600` = 400 GiB); depois, no Windows, *Gerenciamento de Disco* → criar partição NTFS no espaço não alocado → ativar BitLocker To Go (ou criar volume VeraCrypt) | a partição 1 (ISOs, exFAT) **nunca** pode ser criptografada, senão o Ventoy não lê as imagens; a partição 2 (VTOYEFI) não deve ser alterada |
+
+Para qualquer opção:
+
+- Senha/chave de recuperação guardada fora do HD (cofre de senhas da AG Vexa).
+- Uma pasta por ordem de serviço (`OS-<número>`), nunca nomes de clientes.
+- Prazo de guarda combinado com o cliente; apagar após a entrega (`entrega-equipamento.md`).
+- Nunca guardar senhas, documentos pessoais ou fotos além do necessário ao serviço.
 
 ## Atualizações futuras
 
