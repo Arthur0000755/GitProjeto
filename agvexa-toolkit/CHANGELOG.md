@@ -2,6 +2,12 @@
 
 Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 
+## [Não lançado]
+
+### Adicionado
+- Logomarca oficial da AG Vexa (`branding/logo/agvexa-logo.png`) no fundo do tema do boot,
+  nos papéis de parede e no relatório HTML do Windows Optimizer.
+
 ## [0.1.0-rc1] — 2026-10-14 — candidata para homologação
 
 ### Adicionado
@@ -21,5 +27,5 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
   plano de testes, relatório de validação; modelos de relatório.
 
 ### Pendente
-- Testes de boot em VM e hardware físico; testes do Optimizer em Windows; logo oficial;
+- Testes de boot em VM e hardware físico; testes do Optimizer em Windows;
   download e verificação das ISOs reais; instalação no HD (Fase F).

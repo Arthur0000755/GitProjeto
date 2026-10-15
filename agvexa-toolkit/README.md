@@ -53,7 +53,7 @@ conferido entram por padrão.
 | Pasta | Conteúdo |
 |---|---|
 | `docs/` | arquitetura, instalação segura, manual do técnico, procedimentos, ferramentas, compatibilidade, riscos, manutenção, licenças, segurança, validação, Windows Optimizer |
-| `branding/` | paleta, fundos, ícones, fontes livres e licenças, local da logo oficial |
+| `branding/` | paleta, fundos, ícones, fontes livres e licenças, logomarca oficial |
 | `ventoy/` | `ventoy.json` (gerado), `ventoy_grub.cfg` (F6), temas `agvexa` e `agvexa-lite` |
 | `catalog/` | categorias do menu, catálogo de ferramentas, manifesto de ISOs (exemplo) |
 | `media-layout/` | arquivos da raiz do HD (LEIA-ME, `.ventoyignore`) |

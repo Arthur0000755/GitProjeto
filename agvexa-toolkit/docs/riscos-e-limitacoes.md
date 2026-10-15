@@ -12,7 +12,6 @@
 | L6 | Modo texto (CLI) não mostra acentos | nomes com "ç/ã" ficam estranhos | `--ascii-menu` no staging |
 | L7 | Nenhuma ISO real foi baixada | catálogo sem SHA‑256 preenchido | processo em `ferramentas.md` |
 | L8 | Windows Optimizer não executado em Windows | nenhuma validação funcional | autoteste e Pester prontos para o laboratório |
-| L9 | Logomarca oficial ausente | identificação tipográfica temporária | `branding/logo-placeholder/LEIA-ME.md` |
 | L10 | QEMU/OVMF/pwsh/shellcheck ausentes no ambiente | testes correspondentes "Não testado" | instalar só com autorização |
 | L11 | Desenvolvimento feito em contêiner de nuvem (Ubuntu 24.04), não no servidor Ubuntu 26.04 | ambiente diferente do alvo | `scripts/preflight.sh` no servidor antes de usar |
 

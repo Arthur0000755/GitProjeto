@@ -5,6 +5,7 @@
 | Inter (Regular, SemiBold, Bold) | https://github.com/rsms/inter | SIL Open Font License 1.1 — `branding/fonts/LICENSE-Inter-OFL-1.1.txt` | textos renderizados nas imagens de fundo (PNG) |
 | DejaVu Sans Mono | https://dejavu-fonts.github.io/ | Bitstream Vera + domínio público — `branding/fonts/LICENSE-DejaVu.txt` | apenas nas pré-visualizações (`docs/previews`) |
 | Fonte do menu no boot | `unicode.pf2` distribuída com o Ventoy (GNU Unifont, "Unknown Regular 16") | licença do Ventoy/GNU Unifont | texto do menu (o toolkit não redistribui; já vem no Ventoy) |
+| Logomarca oficial AG Vexa | `branding/logo/agvexa-logo.png`, fornecida pelo proprietário | propriedade da AG Vexa | fundo do tema, papéis de parede, relatório do Optimizer |
 | Fundos, molduras, ícones | criados para este projeto por `scripts/build-theme-assets.py` | propriedade da AG Vexa (licença a definir pelo proprietário) | tema e branding |
 
 As fontes ficam versionadas em `branding/fonts/` para que as imagens possam
