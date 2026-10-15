@@ -34,8 +34,6 @@ reports/*
 catalog/isos-manifest.json
 catalog/*.local.json
 
-# Logo oficial: só versionar quando o proprietário autorizar
-branding/logo-placeholder/logo-oficial.*
 
 # Segredos e credenciais (não devem existir neste projeto)
 .env

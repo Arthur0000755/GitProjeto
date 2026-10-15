@@ -32,12 +32,11 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 
 ## Pendências que exigem decisão do proprietário
 
-1. **Logo oficial**: fornecer arquivo (ver `branding/logo-placeholder/LEIA-ME.md`).
-2. **Instalar ferramentas de teste** no servidor (qemu-system-x86, ovmf, shellcheck, powershell) ou usar outro computador para testes de VM.
-3. **Windows 10** na mídia: incluir ou não (fim do suporte regular em 14/10/2025).
-4. **Secure Boot em clientes**: política preferida (desativar temporariamente × registrar chave do Ventoy com autorização do cliente).
-5. **Licença dos arquivos próprios** (documentação, temas, scripts).
-6. **Integração MAPOS**: se/quando (`docs/integracao-mapos-futura.md`).
+1. **Instalar ferramentas de teste** no servidor (qemu-system-x86, ovmf, shellcheck, powershell) ou usar outro computador para testes de VM.
+2. **Windows 10** na mídia: incluir ou não (fim do suporte regular em 14/10/2025).
+3. **Secure Boot em clientes**: política preferida (desativar temporariamente × registrar chave do Ventoy com autorização do cliente).
+4. **Licença dos arquivos próprios** (documentação, temas, scripts).
+5. **Integração MAPOS**: se/quando (`docs/integracao-mapos-futura.md`).
 
 ## Decisões já tomadas (não reabrir sem motivo)
 
@@ -49,3 +48,4 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 ## Histórico
 
 - 2026-10-14 — 0.1.0-rc1: implementação inicial das Fases A–E e do Windows Optimizer.
+- 2026-10-15 — logomarca oficial integrada ao tema do boot, papéis de parede e relatório do Optimizer.

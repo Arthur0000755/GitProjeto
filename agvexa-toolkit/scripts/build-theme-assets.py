@@ -36,7 +36,7 @@ VERSION = open(os.path.join(ROOT, "VERSION"), encoding="utf-8").read().strip()
 
 THEME = os.path.join(ROOT, "ventoy", "themes", "agvexa")
 THEME_LITE = os.path.join(ROOT, "ventoy", "themes", "agvexa-lite")
-OFFICIAL_LOGO = os.path.join(ROOT, "branding", "logo-placeholder", "logo-oficial.png")
+OFFICIAL_LOGO = os.path.join(ROOT, "branding", "logo", "agvexa-logo.png")
 
 # Categorias do menu: classe -> ícone. Mantido em sincronia com
 # catalog/categorias.json (verificado pelos testes).
@@ -122,29 +122,41 @@ def background(w, h, with_panel=True):
     d = ImageDraw.Draw(img)
     m = int(56 * s)
 
-    # cabeçalho: identificação tipográfica (ou logo oficial, se fornecida)
-    y = int(40 * s)
+    # cabeçalho: logo oficial (branding/logo) + nome do produto; sem a logo,
+    # usa identificação tipográfica temporária
+    sub_font = font("semibold", int(14 * s))
+    subtitle = "DIAGNÓSTICO  •  MANUTENÇÃO  •  RECUPERAÇÃO"
     if os.path.exists(OFFICIAL_LOGO):
         logo = Image.open(OFFICIAL_LOGO).convert("RGBA")
-        lh = int(28 * s)
+        lh = int(118 * s)
         logo = logo.resize((max(1, int(logo.width * lh / logo.height)), lh), Image.LANCZOS)
-        img.alpha_composite(logo, (m, y))
+        ly = int(36 * s)
+        img.alpha_composite(logo, (m, ly))
         d = ImageDraw.Draw(img)
+        dx = m + logo.width + int(26 * s)
+        d.line((dx, ly + int(10 * s), dx, ly + lh - int(10 * s)), fill=rgb(PALETTE["borda"]), width=max(1, int(2 * s)))
+        x = dx + int(24 * s)
+        y = ly + int(14 * s)
+        d.text((x - int(2 * s), y), "TOOLKIT", font=font("bold", int(46 * s)), fill=rgb(PALETTE["texto_principal"]))
+        y += int(60 * s)
+        spaced(d, (x, y), subtitle, sub_font, rgb(PALETTE["azul_destaque"]), int(2 * s))
+        y += int(28 * s)
     else:
+        x = m
+        y = int(40 * s)
         spaced(d, (m, y), "AG VEXA", font("semibold", int(14 * s)), rgb(PALETTE["azul_destaque"]), int(4 * s))
         spaced(d, (m + text_width(d, "AG VEXA", font("semibold", int(14 * s)), int(4 * s)) + int(14 * s), y),
                "ASSISTÊNCIA TÉCNICA", font("regular", int(14 * s)), rgb(PALETTE["texto_secundario"]), int(2 * s))
-    y += int(26 * s)
-    d.text((m - int(2 * s), y), "AG VEXA TOOLKIT", font=font("bold", int(42 * s)), fill=rgb(PALETTE["texto_principal"]))
-    y += int(56 * s)
-    spaced(d, (m, y), "DIAGNÓSTICO  •  MANUTENÇÃO  •  RECUPERAÇÃO", font("semibold", int(14 * s)),
-           rgb(PALETTE["azul_destaque"]), int(2 * s))
-    y += int(30 * s)
+        y += int(26 * s)
+        d.text((m - int(2 * s), y), "AG VEXA TOOLKIT", font=font("bold", int(42 * s)), fill=rgb(PALETTE["texto_principal"]))
+        y += int(56 * s)
+        spaced(d, (m, y), subtitle, sub_font, rgb(PALETTE["azul_destaque"]), int(2 * s))
+        y += int(30 * s)
     # filete de destaque em degradê
     for i in range(int(140 * s)):
         t = i / (140 * s)
         c = tuple(int(rgb(PALETTE["azul_destaque"])[k] * (1 - t) + rgb(PALETTE["azul_secundario"])[k] * t) for k in range(3))
-        d.line((m + i, y, m + i, y + max(2, int(3 * s))), fill=c + (255,))
+        d.line((x + i, y, x + i, y + max(2, int(3 * s))), fill=c + (255,))
 
     if with_panel:
         # painel "Como usar" à direita do menu

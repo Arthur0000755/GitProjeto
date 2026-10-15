@@ -21,6 +21,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\AGVexa-Optimizer.ps1
 | `New-AGVexaReport.ps1` | relatório técnico local (HTML/Markdown) |
 | `lib/AGVexa.Common.psm1` | funções comuns (sessão, backup, ajustes) |
 | `profiles/ajustes.json` | catálogo de ajustes e perfis |
+| `assets/agvexa-logo.png` | logomarca usada no relatório HTML |
 | `tests/` | autoteste sem dependências e testes Pester 5 |
 
 Manual completo: `AGVexa/docs/windows-optimizer.md` (no HD) ou `docs/windows-optimizer.md` (no projeto).

@@ -133,6 +133,7 @@ if ($Formato -in 'Html', 'Ambos') {
 body{font-family:Segoe UI,Arial,sans-serif;margin:0;color:var(--txt);background:#F8FAFC}
 header{background:var(--bg);color:#F8FAFC;padding:24px 32px;border-bottom:4px solid var(--azul)}
 header small{color:var(--azul);letter-spacing:.2em;font-weight:600}
+header img.logo{height:64px;display:block;margin-bottom:10px}
 header h1{margin:6px 0 2px;font-size:24px}header p{margin:0;color:#94A3B8}
 main{padding:24px 32px;max-width:980px}
 table{border-collapse:collapse;width:100%;margin:8px 0 24px;font-size:14px}
@@ -145,8 +146,17 @@ tr.alerta td{color:var(--al);font-weight:600}tr.info td{color:var(--sec)}
 footer{color:var(--sec);font-size:12px;padding:16px 32px}
 @media print{header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style></head><body>
-<header><small>AG VEXA</small><h1>Relatório técnico - Windows Optimizer</h1><p>Assistência Técnica</p></header><main>
 '@)
+    # Logomarca oficial embutida no HTML (arquivo local; nada é buscado na internet)
+    $logoPath = Join-Path (Join-Path $PSScriptRoot 'assets') 'agvexa-logo.png'
+    $brand = '<small>AG VEXA</small>'
+    $tagline = '<p>Assistência Técnica</p>'
+    if (Test-Path -LiteralPath $logoPath) {
+        $b64 = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($logoPath))
+        $brand = '<img class="logo" alt="AG Vexa Assistência Técnica" src="data:image/png;base64,' + $b64 + '">'
+        $tagline = ''   # a logo já traz "Assistência Técnica"
+    }
+    [void]$sb.AppendFormat('<header>{0}<h1>Relatório técnico - Windows Optimizer</h1>{1}</header><main>', $brand, $tagline)
     [void]$sb.Append('<table class="meta">')
     foreach ($k in $header.Keys) { [void]$sb.AppendFormat('<tr><th>{0}</th><td>{1}</td></tr>', (H $k), (H $header[$k])) }
     [void]$sb.Append('</table>')
