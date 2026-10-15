@@ -1,0 +1,88 @@
+# AG Vexa Toolkit - tema principal (GRUB2 gfxmenu, carregado pelo Ventoy)
+# Base de desenho: 1024x768 (gfxmode padrão do Ventoy). Posições em % para
+# tolerar outras resoluções. Fonte: padrão do Ventoy (unicode.pf2,
+# "Unknown Regular 16"), por isso nenhuma propriedade de fonte é definida.
+# Propriedades confirmadas em Ventoy 1.1.18:
+#   GRUB2/MOD_SRC/grub-2.04/grub-core/gfxmenu/theme_loader.c, gui_list.c, gui_label.c
+# Versão do toolkit exibida no rodapé: manter igual ao arquivo VERSION
+# (verificado por scripts/validate-config.sh).
+
+desktop-image: "background.png"
+desktop-image-scale-method: "stretch"
+desktop-color: "#0B1220"
+title-text: " "
+title-color: "#F8FAFC"
+message-color: "#E2E8F0"
+message-bg-color: "#111C30"
+terminal-box: "terminal_box_*.png"
+
++ boot_menu {
+  left = 5.5%
+  top = 26%
+  width = 60.5%
+  height = 55%
+
+  menu_pixmap_style = "menu_*.png"
+
+  item_color = "#E2E8F0"
+  selected_item_color = "#FFFFFF"
+  selected_item_pixmap_style = "select_*.png"
+
+  item_height = 36
+  item_padding = 4
+  item_spacing = 4
+  icon_width = 24
+  icon_height = 24
+  item_icon_space = 12
+
+  scrollbar = true
+  scrollbar_width = 6
+  scrollbar_thumb = "slider_*.png"
+}
+
+# Contagem regressiva (só aparece se VTOY_MENU_TIMEOUT for definido;
+# o AG Vexa Toolkit NÃO define timeout para nunca iniciar nada sozinho).
++ progress_bar {
+  id = "__timeout__"
+  text = "@TIMEOUT_NOTIFICATION_SHORT@"
+  left = 70%
+  top = 85%
+  width = 25%
+  height = 20
+  text_color = "#F59E0B"
+  bar_style = "*"
+  highlight_style = "*"
+}
+
+# Linha de atalhos do Ventoy (texto traduzido pelo próprio Ventoy)
++ hbox {
+  left = 5.5%
+  top = 90%
+  width = 60%
+  height = 20
+  + label { text = "@VTOY_HOTKEY_TIP@" color = "#94A3B8" align = "left" }
+}
+
+# Indicadores de modos especiais do Ventoy (ficam vazios no uso normal).
+# Em âmbar para chamar atenção quando algum modo estiver ativo.
++ vbox {
+  left = 70%
+  top = 5%
+  width = 26%
+  + label { text = "@VTOY_MEM_DISK@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_ISO_RAW@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_GRUB2_MODE@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_WIMBOOT_MODE@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_ISO_UEFI_DRV@" color = "#F59E0B" align = "left" }
+}
+
+# Rodapé: versão do toolkit e versão real do Ventoy instalado
+# ("@@VENTOY_VERSION" lê a variável de ambiente do GRUB - gui_label.c).
++ hbox {
+  left = 62%
+  top = 95%
+  width = 34%
+  height = 20
+  + label { text = "Toolkit 0.1.0-rc1  |  Ventoy " color = "#94A3B8" align = "left" }
+  + label { text = "@@VENTOY_VERSION" color = "#94A3B8" align = "left" }
+}

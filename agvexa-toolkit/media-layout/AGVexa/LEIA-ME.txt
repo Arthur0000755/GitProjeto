@@ -1,0 +1,11 @@
+AG VEXA TOOLKIT - MATERIAL DE APOIO
+
+  docs/               Manual do técnico, procedimentos de atendimento,
+                      compatibilidade, riscos, licenças.
+  modelos/            Modelos de relatórios e checklists AG Vexa.
+  windows-optimizer/  Scripts PowerShell pós-formatação (Windows 10/11).
+                      Comece por windows-optimizer/LEIA-ME.md.
+  catalogo/           Catálogo de ferramentas e manifesto de ISOs.
+
+O arquivo .ventoyignore nesta pasta faz o Ventoy ignorá-la na busca
+por imagens (recurso oficial do Ventoy).

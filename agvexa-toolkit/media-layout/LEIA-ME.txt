@@ -1,0 +1,37 @@
+AG VEXA TOOLKIT - HD EXTERNO BOOTÁVEL
+AG Vexa - Assistência Técnica
+=====================================================================
+
+Este HD contém o AG Vexa Toolkit, uma central de ferramentas
+inicializáveis (boot) para diagnóstico, manutenção, recuperação de
+dados e instalação de sistemas. O boot é feito pelo Ventoy.
+
+ESTRUTURA DESTA PARTIÇÃO
+  ISO/        Imagens inicializáveis, separadas por categoria.
+              NÃO renomeie as pastas: os nomes do menu dependem delas.
+  ventoy/     Configuração do menu (ventoy.json), temas e menu F6.
+              O nome "ventoy" deve permanecer em minúsculas.
+  AGVexa/     Documentação, modelos de relatório, catálogo de
+              ferramentas e o AG Vexa Windows Optimizer.
+  SHA256SUMS-AGVEXA.txt
+              Somas de verificação de todos os arquivos copiados.
+
+USO BÁSICO
+  1. Conecte o HD, ligue o computador e abra o menu de boot do
+     firmware (tecla varia: F12, F11, F8, Esc...).
+  2. Escolha o HD externo (modo UEFI de preferência).
+  3. Navegue pelas categorias. Leia a dica exibida abaixo do menu.
+  4. F6 abre informações do toolkit e regras de segurança.
+     F5 permite trocar o tema ou usar modo texto se a tela falhar.
+
+REGRAS DE SEGURANÇA (resumo)
+  - Só trabalhe com autorização do proprietário do equipamento.
+  - Faça backup antes de qualquer reparo, formatação ou instalação.
+  - Identifique origem e destino pelo modelo, série e capacidade.
+  - Diagnóstico primeiro, sempre em modo leitura.
+  - Não contorne senhas nem criptografia de clientes.
+
+ATUALIZAÇÃO
+  Não edite arquivos diretamente neste HD. As alterações são feitas no
+  projeto AG Vexa Toolkit (servidor), validadas e copiadas novamente.
+  Consulte AGVexa/docs/manutencao.md.

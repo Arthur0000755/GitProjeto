@@ -1,0 +1,71 @@
+# AG Vexa Toolkit - tema LEVE (alternativo / recuperação visual)
+# Sem imagem de fundo e sem molduras: indicado para placas de vídeo
+# antigas, firmware com vídeo lento ou quando o tema principal falhar.
+# Selecione em: F5 (Ferramentas) > Seleção de Tema.
+# Se nem este tema funcionar: F5 > Modo de Exibição da Tela > modo texto.
+
+desktop-color: "#0B1220"
+title-text: "AG VEXA TOOLKIT  -  Diagnóstico, Manutenção e Recuperação"
+title-color: "#F8FAFC"
+message-color: "#E2E8F0"
+
++ boot_menu {
+  left = 5%
+  top = 14%
+  width = 90%
+  height = 68%
+
+  item_color = "#E2E8F0"
+  selected_item_color = "#FFFFFF"
+  selected_item_pixmap_style = "select_*.png"
+
+  item_height = 30
+  item_padding = 2
+  item_spacing = 2
+  icon_width = 24
+  icon_height = 24
+  item_icon_space = 10
+
+  scrollbar = true
+  scrollbar_width = 4
+}
+
++ progress_bar {
+  id = "__timeout__"
+  text = "@TIMEOUT_NOTIFICATION_SHORT@"
+  left = 70%
+  top = 85%
+  width = 25%
+  height = 20
+  text_color = "#F59E0B"
+  bar_style = "*"
+  highlight_style = "*"
+}
+
++ hbox {
+  left = 5%
+  top = 90%
+  width = 90%
+  height = 20
+  + label { text = "@VTOY_HOTKEY_TIP@" color = "#94A3B8" align = "left" }
+}
+
++ vbox {
+  left = 70%
+  top = 3%
+  width = 28%
+  + label { text = "@VTOY_MEM_DISK@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_ISO_RAW@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_GRUB2_MODE@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_WIMBOOT_MODE@" color = "#F59E0B" align = "left" }
+  + label { text = "@VTOY_ISO_UEFI_DRV@" color = "#F59E0B" align = "left" }
+}
+
++ hbox {
+  left = 5%
+  top = 95%
+  width = 60%
+  height = 20
+  + label { text = "Toolkit 0.1.0-rc1  |  Ventoy " color = "#94A3B8" align = "left" }
+  + label { text = "@@VENTOY_VERSION" color = "#94A3B8" align = "left" }
+}

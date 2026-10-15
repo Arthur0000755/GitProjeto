@@ -1,0 +1,214 @@
+# Catálogo de ferramentas do AG Vexa Toolkit
+# ---------------------------------------------------------------------------
+# status:
+#   incluida      -> faz parte do núcleo; tem ISO própria no manifesto
+#   embutida      -> não tem ISO própria; está dentro de outra ferramenta
+#   opcional      -> suportada, mas desabilitada por padrão
+#   em_avaliacao  -> depende de verificação adicional antes de entrar
+#   rejeitada     -> avaliada e não incluída (motivo registrado)
+#
+# IMPORTANTE: versões, checksums e disponibilidade mudam. Os campos abaixo
+# foram registrados em 2026-10-14 e DEVEM ser reconferidos na fonte oficial
+# no momento do download (docs/manutencao.md). Este ambiente de
+# desenvolvimento não teve acesso aos sites dos projetos, exceto ao código
+# do Ventoy (GitHub); por isso "verificado_em_fonte" indica o que foi
+# confirmado diretamente.
+# ---------------------------------------------------------------------------
+
+base_de_boot:
+  id: ventoy
+  nome: Ventoy
+  projeto_oficial: https://www.ventoy.net/
+  codigo_fonte: https://github.com/ventoy/Ventoy
+  versao_referencia: "1.1.18"
+  licenca: GPL-3.0 (com componentes de terceiros sob suas licenças; ver License/ no código)
+  redistribuicao: permitida conforme GPL-3.0; este projeto NÃO redistribui o Ventoy (o técnico baixa da fonte oficial)
+  integridade: conferir o SHA-256 publicado na página da release
+  verificado_em_fonte: "código-fonte 1.1.18 (commit 582704c, 2026-10-12): plugins, opções de controle, tema, menu F6, Secure Boot"
+  observacoes:
+    - Secure Boot usa shim de terceiros e exige registrar a chave do Ventoy no MokManager no primeiro boot.
+    - O projeto publica BLOB_List.md com instruções de compilação dos binários pré-compilados.
+
+ferramentas:
+  - id: windows-11
+    nome: Windows 11
+    categoria: 01-instalacao-sistemas
+    projeto_oficial: https://www.microsoft.com/software-download/windows11
+    licenca: Proprietária (Microsoft)
+    redistribuicao: proibida - cada técnico baixa da Microsoft; nunca versionar no Git
+    status: incluida
+    uso_principal: Instalação limpa ou reinstalação autorizada do Windows 11.
+    riscos: Apaga o disco/partição escolhidos na instalação. Exige licença do cliente.
+    requer_internet: false
+    requer_internet_obs: a instalação funciona offline; ativação e atualizações exigem internet
+    secure_boot: suportado (mídia assinada pela Microsoft)
+    modos_boot: [uefi64]
+    observacoes:
+      - Requisitos oficiais incluem TPM 2.0, Secure Boot e CPU compatível.
+      - VTOY_WIN11_BYPASS_CHECK fica 0 (desligado). Contornar requisitos é decisão do proprietário, documentada.
+
+  - id: windows-10
+    nome: Windows 10
+    categoria: 01-instalacao-sistemas
+    projeto_oficial: https://www.microsoft.com/software-download/windows10
+    licenca: Proprietária (Microsoft)
+    redistribuicao: proibida
+    status: opcional
+    uso_principal: Somente equipamentos que não suportam Windows 11 e quando o cliente aceitar o risco registrado.
+    riscos: Suporte regular encerrado em 14/10/2025; sem atualizações de segurança fora de programas pagos (ESU). Registrar no relatório.
+    requer_internet: false
+    secure_boot: suportado
+    modos_boot: [uefi64, bios]
+
+  - id: memtest86plus
+    nome: MemTest86+
+    categoria: 02-diagnostico-hardware
+    projeto_oficial: https://www.memtest.org/
+    licenca: GPL-2.0
+    redistribuicao: permitida conforme GPL-2.0
+    status: incluida
+    uso_principal: Teste de memória RAM não destrutivo.
+    riscos: Teste longo aquece o equipamento. Não grava em discos.
+    requer_internet: false
+    secure_boot: verificar na versão baixada
+    modos_boot: [uefi64, bios]
+    observacoes:
+      - Não confundir com o MemTest86 (PassMark), que é outro produto com licença diferente.
+
+  - id: gparted-live
+    nome: GParted Live
+    categoria: 03-manutencao-discos
+    projeto_oficial: https://gparted.org/
+    licenca: GPL-2.0-or-later (aplicativo) + licenças da distribuição base
+    redistribuicao: permitida conforme GPL
+    status: incluida
+    uso_principal: Visualizar e, quando autorizado, alterar partições e sistemas de arquivos. Contém utilitários de verificação.
+    riscos: Operações de redimensionar, mover, formatar e apagar partições podem destruir dados.
+    requer_internet: false
+    secure_boot: verificar na versão baixada
+    modos_boot: [uefi64, bios]
+
+  - id: smartmontools
+    nome: smartmontools (smartctl) / GSmartControl
+    categoria: 05-linux-live
+    projeto_oficial: https://www.smartmontools.org/
+    licenca: GPL-2.0-or-later
+    redistribuicao: permitida conforme GPL
+    status: embutida
+    embutida_em: [systemrescue]
+    uso_principal: Leitura do estado SMART de HDs e SSDs (somente leitura no uso recomendado).
+    riscos: Testes longos ('smartctl -t long') são seguros para dados, mas exigem disco estável e tempo. Interpretação incorreta leva a diagnóstico errado.
+    requer_internet: false
+    observacoes:
+      - GSmartControl (interface gráfica) depende da ferramenta live; confirmar presença na versão baixada.
+
+  - id: rescuezilla
+    nome: Rescuezilla
+    categoria: 04-backup-recuperacao
+    projeto_oficial: https://rescuezilla.com/
+    licenca: GPL-3.0
+    redistribuicao: permitida conforme GPL-3.0
+    status: incluida
+    uso_principal: Backup (imagem), restauração e clonagem com interface gráfica; compatível com imagens Clonezilla.
+    riscos: Restaurar/clonar sobrescreve o destino. Origem e destino invertidos destroem dados.
+    requer_internet: false
+    secure_boot: verificar na versão baixada (base Ubuntu)
+    modos_boot: [uefi64, bios]
+
+  - id: clonezilla
+    nome: Clonezilla Live
+    categoria: 06-ferramentas-avancadas
+    projeto_oficial: https://clonezilla.org/
+    licenca: GPL-2.0-or-later
+    redistribuicao: permitida conforme GPL
+    status: incluida
+    uso_principal: Clonagem e imagens de disco/partição em modo texto, com mais opções que o Rescuezilla.
+    riscos: Interface em texto com muitas opções; erros de seleção sobrescrevem discos.
+    requer_internet: false
+    secure_boot: verificar (existe variante baseada em Ubuntu)
+    modos_boot: [uefi64, bios]
+
+  - id: systemrescue
+    nome: SystemRescue
+    categoria: 05-linux-live
+    projeto_oficial: https://www.system-rescue.org/
+    licenca: GPL e outras licenças livres dos pacotes incluídos
+    redistribuicao: permitida conforme licenças dos componentes
+    status: incluida
+    uso_principal: Ambiente de resgate com smartctl, TestDisk, PhotoRec, GNU ddrescue, GParted e ferramentas de rede.
+    riscos: Ambiente com acesso total aos discos; comandos de escrita (dd, mkfs, fdisk, wipefs) destroem dados se usados errado.
+    requer_internet: false
+    secure_boot: verificar na versão baixada
+    modos_boot: [uefi64, bios]
+
+  - id: testdisk
+    nome: TestDisk
+    categoria: 05-linux-live
+    projeto_oficial: https://www.cgsecurity.org/wiki/TestDisk
+    licenca: GPL-2.0-or-later
+    redistribuicao: permitida conforme GPL
+    status: embutida
+    embutida_em: [systemrescue]
+    uso_principal: Análise e recuperação de tabelas de partição e setores de boot.
+    riscos: Gravar uma tabela de partições errada pode piorar a situação. Primeiro só analisar e listar arquivos.
+    requer_internet: false
+
+  - id: photorec
+    nome: PhotoRec
+    categoria: 05-linux-live
+    projeto_oficial: https://www.cgsecurity.org/wiki/PhotoRec
+    licenca: GPL-2.0-or-later
+    redistribuicao: permitida conforme GPL
+    status: embutida
+    embutida_em: [systemrescue]
+    uso_principal: Recuperação de arquivos apagados por assinatura (carving).
+    riscos: Salvar os arquivos recuperados no MESMO disco sobrescreve o que ainda poderia ser recuperado.
+    requer_internet: false
+
+  - id: ddrescue
+    nome: GNU ddrescue
+    categoria: 05-linux-live
+    projeto_oficial: https://www.gnu.org/software/ddrescue/
+    licenca: GPL-3.0-or-later
+    redistribuicao: permitida conforme GPL
+    status: embutida
+    embutida_em: [systemrescue]
+    uso_principal: Cópia de discos com defeito físico para outro disco/imagem, com arquivo de mapa (mapfile).
+    riscos: Inverter origem e destino destrói o disco do cliente. Disco degradado pode piorar com uso prolongado.
+    requer_internet: false
+
+  - id: ferramentas-rede
+    nome: Ferramentas de diagnóstico de rede (ping, ip, tracepath/traceroute, dig/nslookup, ethtool)
+    categoria: 05-linux-live
+    projeto_oficial: (pacotes das distribuições live - iputils, iproute2, bind/dnsutils, ethtool)
+    licenca: GPL e licenças BSD/ISC, conforme o pacote
+    redistribuicao: permitida (incluídas nas distribuições)
+    status: embutida
+    embutida_em: [systemrescue, ubuntu-desktop]
+    uso_principal: Diagnóstico AUTORIZADO de conectividade do equipamento do cliente.
+    riscos: Não usar para varrer, capturar ou atacar redes de terceiros. Disponibilidade exata de cada comando varia por versão.
+    requer_internet: true
+    requer_internet_obs: necessário para testar conectividade externa; testes de rede local funcionam sem internet
+
+  - id: ubuntu-desktop
+    nome: Ubuntu Desktop (LTS)
+    categoria: 05-linux-live
+    projeto_oficial: https://ubuntu.com/download/desktop
+    licenca: Diversas licenças livres; marca Ubuntu sujeita à política de marca da Canonical
+    redistribuicao: permitida sem modificações
+    status: incluida
+    uso_principal: Ambiente live amigável (navegador de arquivos, teste de hardware, rede) e instalação do Ubuntu.
+    riscos: A opção de instalar pode apagar o disco.
+    requer_internet: false
+    secure_boot: suportado (shim assinado)
+    modos_boot: [uefi64, bios]
+
+avaliadas_e_nao_incluidas:
+  - nome: Hiren's BootCD PE e coleções semelhantes baseadas em Windows PE
+    motivo: Reúnem softwares de terceiros cuja redistribuição e procedência não podem ser verificadas item a item; contraria "nenhum aplicativo Windows obrigatório" e "procedência conhecida".
+  - nome: Ferramentas de remoção de senha / quebra de criptografia
+    motivo: Fora do escopo ético do toolkit (não contornar proteções de clientes).
+  - nome: Ferramentas de varredura/ataque de rede
+    motivo: Fora do escopo; o toolkit faz apenas diagnóstico autorizado.
+  - nome: MemTest86 (PassMark)
+    motivo: Licença proprietária com restrições de redistribuição; MemTest86+ (GPL) atende ao uso.

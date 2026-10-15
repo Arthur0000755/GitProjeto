@@ -1,0 +1,61 @@
+# ---------------------------------------------------------------
+# AG Vexa Toolkit - itens que NUNCA devem ir para o Git
+# ---------------------------------------------------------------
+
+# Imagens de sistemas e ferramentas (grandes e/ou proprietárias)
+*.iso
+*.ISO
+*.img
+*.IMG
+*.wim
+*.esd
+*.vhd
+*.vhdx
+*.vtoy
+*.qcow2
+*.raw
+*.xz
+*.zst
+
+# Biblioteca local de ISOs (fora do Git, apenas o LEIA-ME)
+isos/*
+!isos/LEIA-ME.md
+
+# Artefatos gerados (staging, imagens de teste, caches)
+build/*
+!build/.gitkeep
+.cache/
+
+# Relatórios gerados localmente (podem conter dados de equipamentos)
+reports/*
+!reports/.gitkeep
+
+# Manifesto real de ISOs (o exemplo fica versionado)
+catalog/isos-manifest.json
+catalog/*.local.json
+
+# Logo oficial: só versionar quando o proprietário autorizar
+branding/logo-placeholder/logo-oficial.*
+
+# Segredos e credenciais (não devem existir neste projeto)
+.env
+*.env
+*.key
+*.pem
+*.pfx
+*.p12
+secrets/
+
+# Ventoy baixado localmente para testes (não redistribuir pelo Git)
+vendor/
+
+# Python / editores / SO
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+._*

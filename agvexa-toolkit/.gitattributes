@@ -1,0 +1,10 @@
+# Finais de linha: PowerShell no Windows usa CRLF; scripts Linux usam LF.
+*.ps1  text eol=crlf
+*.psm1 text eol=crlf
+*.sh   text eol=lf
+*.py   text eol=lf
+*.cfg  text eol=lf
+*.txt  text
+*.png  binary
+*.otf  binary
+*.ttf  binary
