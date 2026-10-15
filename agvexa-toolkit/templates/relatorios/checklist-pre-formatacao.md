@@ -15,7 +15,7 @@ OS: {{OS}} · Data: {{DATA}} · Técnico: {{TECNICO}} · Toolkit {{VERSAO}}
 - [ ] Licenças e chaves de programas pagos anotadas pelo cliente
 - [ ] Drivers específicos/softwares do fabricante identificados (modelo exato do equipamento)
 - [ ] ★ Backup **conferido**: abrir alguns arquivos de cada pasta no destino; comparar quantidade/tamanho
-- [ ] ★ Destino do backup: ☐ HD do cliente ☐ mídia AG Vexa (prazo de guarda: ___ dias, depois apagar)
+- [ ] ★ Destino do backup: ☐ HD do cliente ☐ disco/partição **criptografada** da AG Vexa, pasta `OS-<número>` (prazo de guarda: ___ dias, depois apagar). Nunca no HD do toolkit.
 
 ## Sistema e licença ★
 - [ ] ★ Edição do Windows a reinstalar corresponde à licença (Home/Pro)

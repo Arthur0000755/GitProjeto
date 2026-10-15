@@ -1,0 +1,18 @@
+AG VEXA TOOLKIT - DRIVERS
+=====================================================================
+Drivers para usar com o Windows aberto (pós-formatação, falta de driver
+de rede, armazenamento etc.). Esta pasta NÃO aparece no menu de boot.
+
+ORGANIZAÇÃO
+  DRIVERS/<Fabricante>/<Modelo>/<componente>_<versão>/
+  Ex.: DRIVERS/Lenovo/IdeaPad-3-15ITL6/rede-wifi_22.130/
+       DRIVERS/Genericos/Intel-RST-VMD_19.5/   (necessário para ver SSD
+       NVMe em alguns notebooks durante a instalação do Windows)
+
+REGRAS
+  1. Baixe SOMENTE do site do fabricante do equipamento ou do componente
+     (Dell, Lenovo, HP, Acer, ASUS, Intel, AMD, NVIDIA, Realtek...).
+  2. Nunca use "atualizadores automáticos de driver" de terceiros.
+  3. Registre cada arquivo no INVENTARIO.csv (origem, versão, data, SHA-256).
+  4. Prefira o Windows Update quando ele oferecer o driver correto.
+  5. Apague versões antigas ao atualizar, para não instalar a errada.

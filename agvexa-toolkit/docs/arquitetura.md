@@ -21,6 +21,8 @@ o **menu estendido** `/ventoy/ventoy_grub.cfg` (tecla F6).
  │  ventoy/themes/agvexa/   ← tema principal             │                        │
  │  ventoy/themes/agvexa-lite/ ← tema leve (alternativo) │                        │
  │  AGVexa/                 ← docs, modelos, Optimizer   │                        │
+ │  DRIVERS/ INSTALADORES/ FERRAMENTAS/ BIOS_FIRMWARE/   │                        │
+ │                          ← apoio no Windows (extras/) │                        │
  │  SHA256SUMS-AGVEXA.txt   ← conferência pós-cópia      │                        │
  └───────────────────────────────────────────────────────┴────────────────────────┘
 ```

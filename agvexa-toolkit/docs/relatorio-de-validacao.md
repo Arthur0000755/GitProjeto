@@ -14,7 +14,7 @@ Resultado: **22 verificações passaram, 0 falharam, 2 puladas.**
 | `bash -n` em todos os `.sh` (8 arquivos) | Testado e aprovado | |
 | shellcheck | **Não testado** | ferramenta não instalada |
 | `--help` e rejeição de opção inválida (código 64) em 6 scripts | Testado e aprovado | |
-| Testes unitários Python: **83 testes** | Testado e aprovado | detalhes abaixo |
+| Testes unitários Python: **89 testes** | Testado e aprovado | detalhes abaixo |
 | `validate-config.sh` do projeto | Testado e aprovado | 0 erros; 1 aviso esperado (manifesto real ainda não criado) |
 | Sintaxe PowerShell com `pwsh` | **Não testado** | pwsh não instalado; coberto parcialmente pela análise estática |
 
@@ -24,7 +24,7 @@ Testes unitários:
 |---|---|---|
 | `test_ventoy_config.py` | 21 | `ventoy.json` gerado = versionado; UTF‑8 sem escapes; política de segurança; rejeição de BOM, JSON inválido, opção não documentada, valor fora da faixa, tipo errado, timeout, bypass Win11, plugin desconhecido, caminho relativo, barra final, alias longo, tema ausente, `default_file` inválido, `menu_class` ambíguo; modo ASCII |
 | `test_theme.py` | 24 | os dois temas válidos e com versão; analisador de `theme.txt`; erros de chaves, propriedades, cores, imagens; PNG entrelaçado/16 bits/paleta/inválido recusados; ícones de todas as classes; menu F6 válido, comandos de boot proibidos, chaves desbalanceadas |
-| `test_isos_and_staging.py` | 19 | status VERIFICADA/DIVERGENTE/NAO_VERIFICADA/TIPO_INVALIDO/AUSENTE/TAMANHO_DIVERGENTE/DESABILITADA/NAO_CATALOGADA; checksums oficiais GNU e BSD; detecção MBR/GPT; cache; staging só com verificadas; `[NÃO VERIFICADA]`; DIVERGENTE nunca entra; layout; SHA256SUMS; links; `--dry-run`; recusas (fora de `build/`, `/dev`, link simbólico, diretório não marcado) |
+| `test_isos_and_staging.py` | 25 | status VERIFICADA/DIVERGENTE/NAO_VERIFICADA/TIPO_INVALIDO/AUSENTE/TAMANHO_DIVERGENTE/DESABILITADA/NAO_CATALOGADA; checksums oficiais GNU e BSD; detecção MBR/GPT; cache; staging só com verificadas; `[NÃO VERIFICADA]`; DIVERGENTE nunca entra; layout; SHA256SUMS; links; pastas de apoio e extras/; recusa de CLIENTES; `--dry-run`; recusas (fora de `build/`, `/dev`, link simbólico, diretório não marcado) |
 | `test_security.py` | 7 | varredura de comandos destrutivos (shell, Python, PowerShell), catálogo do Optimizer, autoteste do próprio scanner, ausência de arquivos grandes/ISOs, `.gitignore` |
 | `test_powershell_static.py` | 12 | BOM UTF‑8, cabeçalhos/ajuda, WhatIf, blocos balanceados, ausência de sintaxe exclusiva do PS7, padrão "somente análise", ordem dos 12 passos, opções do menu, versão, catálogo |
 

@@ -1,0 +1,21 @@
+AG VEXA TOOLKIT - BIOS / FIRMWARE
+=====================================================================
+ATENÇÃO: ATUALIZAR BIOS/UEFI OU FIRMWARE É A OPERAÇÃO MAIS ARRISCADA DO
+ATENDIMENTO. Arquivo errado, queda de energia ou interrupção podem
+inutilizar a placa-mãe ou o dispositivo.
+
+ORGANIZAÇÃO
+  BIOS_FIRMWARE/<Fabricante>/<Modelo-EXATO>/<versão>/
+  Guarde junto as notas de versão (release notes) do fabricante.
+
+REGRAS
+  1. Somente arquivos do site do FABRICANTE para o modelo EXATO
+     (confira etiqueta, número de série/service tag e revisão da placa).
+  2. Atualize apenas quando houver motivo registrado: correção de falha,
+     segurança, compatibilidade. "Estar desatualizado" não é motivo.
+  3. Autorização do cliente por escrito, com o risco explicado.
+  4. Notebook: bateria carregada E carregador conectado. Desktop: de
+     preferência com nobreak.
+  5. Nunca interrompa a atualização. Siga o procedimento do fabricante.
+  6. Registre no INVENTARIO.csv e no relatório: versão anterior, versão
+     nova, data e resultado.
