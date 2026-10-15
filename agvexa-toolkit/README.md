@@ -2,7 +2,7 @@
 
 **AG Vexa — Assistência Técnica** · *Diagnóstico • Manutenção • Recuperação*
 
-Central profissional de ferramentas inicializáveis para um HD externo de 1 TB,
+Central profissional de ferramentas inicializáveis para um HD externo (320 GB),
 baseada no **Ventoy**, com identidade visual AG Vexa (tema escuro), catálogo
 de ferramentas verificadas, scripts de preparação seguros, manual do técnico
 em português e o módulo **AG Vexa Windows Optimizer** para pós-formatação.
@@ -73,7 +73,7 @@ conferido entram por padrão.
 
 - [Arquitetura e decisões](docs/arquitetura.md)
 - [Manual do Técnico](docs/manual-do-tecnico.md) · [Procedimentos de atendimento](docs/procedimentos-de-atendimento.md)
-- [Instalação segura no HD (Fase F)](docs/instalacao-segura.md)
+- [Instalação segura no HD (Fase F)](docs/instalacao-segura.md) · [HD de arquivo da empresa (1 TB)](docs/hd-arquivo-1tb.md)
 - [Windows Optimizer](docs/windows-optimizer.md)
 - [Riscos e limitações](docs/riscos-e-limitacoes.md) · [Segurança](docs/relatorio-de-seguranca.md) · [Licenças](docs/licencas.md)
 - [Progresso e pendências](PROGRESSO.md) · [Changelog](CHANGELOG.md)

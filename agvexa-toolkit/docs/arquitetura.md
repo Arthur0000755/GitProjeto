@@ -11,7 +11,7 @@ do Ventoy: usa apenas os **plugins oficiais** lidos de `/ventoy/ventoy.json` e
 o **menu estendido** `/ventoy/ventoy_grub.cfg` (tecla F6).
 
 ```
- ┌──────────────────────────── HD externo 1 TB (futuro) ─────────────────────────┐
+ ┌─────────────────────────── HD externo 320 GB (futuro) ─────────────────────────┐
  │ Partição 1 (exFAT, "dados")                          │ Partição 2 (VTOYEFI)   │
  │  ISO/<categoria>/*.iso   ← imagens verificadas        │  GRUB/EFI do Ventoy    │
  │  ventoy/ventoy.json      ← plugins: control, theme,   │  (instalada pelo       │

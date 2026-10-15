@@ -28,7 +28,8 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 3. (Com autorização) instalar QEMU/OVMF ou usar outro computador; executar `test-boot.sh --plan` e VM‑1 a VM‑9.
 4. Testar o Windows Optimizer em VM Windows 10/11 (W‑1 a W‑13).
 5. Ajustar tema conforme capturas reais.
-6. Fase F com o proprietário (`docs/instalacao-segura.md`), depois testes HW‑1 a HW‑5.
+6. Preparar o HD de 1 TB: SMART, cópia de segurança, criptografia e organização (`docs/hd-arquivo-1tb.md`).
+7. Fase F no HD de **320 GB** com o proprietário (`docs/instalacao-segura.md`), depois testes HW‑1 a HW‑5.
 
 ## Pendências que exigem decisão do proprietário
 
@@ -36,8 +37,7 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 2. **Windows 10** na mídia: incluir ou não (fim do suporte regular em 14/10/2025).
 3. **Secure Boot em clientes**: política preferida (desativar temporariamente × registrar chave do Ventoy com autorização do cliente).
 4. **Licença dos arquivos próprios** (documentação, temas, scripts).
-5. **Dados de clientes**: HD separado criptografado (recomendado) ou partição reservada com `-r` na instalação do Ventoy — decidir antes da Fase F.
-6. **Integração MAPOS**: se/quando (`docs/integracao-mapos-futura.md`).
+5. **Integração MAPOS**: se/quando (`docs/integracao-mapos-futura.md`).
 
 ## Decisões já tomadas (não reabrir sem motivo)
 
@@ -45,9 +45,13 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 - ISOs só VERIFICADAS por padrão; sem boot automático; sem bypass do Windows 11.
 - Tema 1024×768 com fonte padrão do Ventoy; textos grandes renderizados no fundo.
 - Optimizer: padrão análise; só ajustes documentados e reversíveis; startup sempre manual.
+- Discos (2026-10-15): **HD 320 GB = toolkit** (Ventoy, sem `-r`); **HD 1 TB = arquivo da empresa**
+  (documentos, cópia mestre do toolkit, backups de clientes), criptografado, fica na bancada
+  (`docs/hd-arquivo-1tb.md`).
 
 ## Histórico
 
 - 2026-10-14 — 0.1.0-rc1: implementação inicial das Fases A–E e do Windows Optimizer.
 - 2026-10-15 — logomarca oficial integrada ao tema do boot, papéis de parede e relatório do Optimizer.
+- 2026-10-15 — decisão de discos: 320 GB = toolkit; 1 TB = arquivo criptografado da empresa com backups de clientes.
 - 2026-10-15 — pastas de apoio (DRIVERS, INSTALADORES, FERRAMENTAS, BIOS_FIRMWARE) e política de dados de clientes fora da mídia.
