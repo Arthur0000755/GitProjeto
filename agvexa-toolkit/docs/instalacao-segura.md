@@ -5,6 +5,9 @@
 > Nenhum script do projeto executa estes comandos: todos os passos são manuais.
 > Não presuma que dados existentes no HD serão preservados.
 
+**Disco definido (decisão do proprietário, 2026-10-15): HD externo de 320 GB.** O HD de
+1 TB passa a ser o arquivo da empresa, com os backups de clientes (`hd-arquivo-1tb.md`).
+
 Pré-requisitos
 
 - Staging gerado e validado: `scripts/prepare-staging.sh` e
@@ -38,7 +41,7 @@ Preencha a tabela e confira **três** atributos (nunca só a letra `sdX`):
 |---|---|---|
 | Modelo | (etiqueta do HD) | |
 | Número de série | (etiqueta do HD) | |
-| Capacidade | ~931 GiB (1 TB) | |
+| Capacidade | ~298 GiB (320 GB) | |
 | Barramento | usb | |
 | Caminho estável | `/dev/disk/by-id/usb-...` | |
 
@@ -62,9 +65,9 @@ udisksctl unmount -b /dev/sdX1     # exemplo; confira o nome
 
 | Opção | Recomendação | Motivo |
 |---|---|---|
-| Estilo de partição | **MBR** (padrão do Ventoy) | 1 TB < 2 TB (limite do MBR) e máxima compatibilidade com BIOS antigos. Use `-g` (GPT) só se algum equipamento-alvo exigir. |
+| Estilo de partição | **MBR** (padrão do Ventoy) | 320 GB < 2 TB (limite do MBR) e máxima compatibilidade com BIOS antigos. Use `-g` (GPT) só se algum equipamento-alvo exigir. |
 | Secure Boot | **habilitado** (`-s`, padrão) | permite boot com Secure Boot ativo após registrar a chave (MokManager). |
-| Reserva de espaço | **decidir agora** | `-r <MiB>` reserva espaço no fim do disco para uma partição criptografada de dados de clientes (seção 10). Só é possível na instalação: mudar depois exige reinstalar o Ventoy (apaga tudo). |
+| Reserva de espaço | **não usar** | dados de clientes ficam no HD de 1 TB (opção A da seção 10); o HD de 320 GB é todo do toolkit. |
 | Instalação "não destrutiva" (`-n`) | **não usar** | recurso de tentativa; o procedimento assume perda total. |
 | Rótulo | `-L AGVEXA` | identifica a partição de dados. |
 
@@ -132,6 +135,9 @@ cd ~ && udisksctl unmount -b /dev/disk/by-label/AGVEXA && udisksctl power-off -b
 4. Registre os resultados em `relatorio-de-validacao.md`.
 
 ## 10. Dados de clientes (partição criptografada separada)
+
+**Opção escolhida: A** — HD de 1 TB criptografado, que fica na bancada. Passo a passo em
+`hd-arquivo-1tb.md`. A opção B fica documentada apenas como referência.
 
 A mídia do toolkit **não tem pasta CLIENTES** e o staging recusa uma. O HD
 circula por casas e empresas; se for perdido, nada de cliente pode estar legível.

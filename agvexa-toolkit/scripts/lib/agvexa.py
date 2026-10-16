@@ -922,7 +922,7 @@ REQUIRED_PATHS = [
     "docs/ferramentas.md", "docs/compatibilidade.md", "docs/riscos-e-limitacoes.md",
     "docs/manutencao.md", "docs/relatorio-de-validacao.md", "docs/relatorio-de-seguranca.md",
     "docs/procedimentos-de-atendimento.md", "docs/licencas.md", "docs/plano-de-testes-boot.md",
-    "docs/windows-optimizer.md",
+    "docs/windows-optimizer.md", "docs/hd-arquivo-1tb.md",
     "branding/palette.json", "branding/fontes-e-licencas.md", "branding/logo/LEIA-ME.md", "branding/logo/agvexa-logo.png",
     "ventoy/ventoy.json", "ventoy/ventoy_grub.cfg",
     "ventoy/themes/agvexa/theme.txt", "ventoy/themes/agvexa-lite/theme.txt",

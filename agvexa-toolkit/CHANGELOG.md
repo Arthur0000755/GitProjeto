@@ -5,6 +5,8 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 ## [Não lançado]
 
 ### Adicionado
+- `docs/hd-arquivo-1tb.md`: guia para criptografar e organizar o HD de 1 TB da empresa (arquivo +
+  backups de clientes) sem perder dados. Toolkit passa a usar o HD de 320 GB.
 - Pastas de apoio na raiz da mídia: `DRIVERS`, `INSTALADORES`, `FERRAMENTAS`, `BIOS_FIRMWARE`,
   com LEIA-ME de regras e `INVENTARIO.csv`; arquivos reais vêm de `extras/` (fora do Git).
 - Staging e validador recusam pasta `CLIENTES`; procedimento de partição criptografada
