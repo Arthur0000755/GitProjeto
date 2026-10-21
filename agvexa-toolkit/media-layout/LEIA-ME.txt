@@ -21,6 +21,9 @@ ESTRUTURA DESTA PARTIÇÃO
               LEIA-ME e mantenha o INVENTARIO.csv de cada uma.
   SHA256SUMS-AGVEXA.txt
               Somas de verificação de todos os arquivos copiados.
+  VERIFICAR-COPIA.cmd
+              Duplo clique no Windows: confere se a cópia está íntegra
+              (somente leitura).
 
 USO BÁSICO
   1. Conecte o HD, ligue o computador e abra o menu de boot do

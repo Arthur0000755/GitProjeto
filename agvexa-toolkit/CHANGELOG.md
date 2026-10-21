@@ -5,6 +5,8 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 ## [Não lançado]
 
 ### Adicionado
+- `VERIFICAR-COPIA.cmd` + `AGVexa/Verificar-Copia.ps1` na raiz da mídia: conferência da cópia por
+  duplo clique no Windows (somente leitura; `-SemISOs` para conferência rápida).
 - `docs/uso-no-windows.md`: fluxo servidor → Windows → HD (Ventoy2Disk.exe, cópia, conferência
   por PowerShell, teste de boot, autoteste do Optimizer na estação LTSC).
 - `docs/hd-arquivo-1tb.md`: guia para criptografar e organizar o HD de 1 TB da empresa (arquivo +

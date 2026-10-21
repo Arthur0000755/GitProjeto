@@ -17,7 +17,13 @@ SCRIPTS = ["AGVexa-Optimizer.ps1", "Get-AGVexaSystemInfo.ps1", "Test-AGVexaOptim
 
 
 def ps_files():
-    for dirpath, _d, files in os.walk(WO):
+    for base in (WO, os.path.join(ROOT, "media-layout")):
+        for p in _ps_files_in(base):
+            yield p
+
+
+def _ps_files_in(base):
+    for dirpath, _d, files in os.walk(base):
         for f in files:
             if f.endswith((".ps1", ".psm1")):
                 yield os.path.join(dirpath, f)
@@ -174,6 +180,20 @@ class PowerShellStaticTests(unittest.TestCase):
         cons = {a["id"] for a in data["ajustes"] if "Conservador" in a["perfis"]}
         perf = {a["id"] for a in data["ajustes"] if "Desempenho" in a["perfis"]}
         self.assertTrue(cons <= perf | {"energia.equilibrado-notebook"})
+
+    def test_media_copy_checker(self):
+        ps = os.path.join(ROOT, "media-layout", "AGVexa", "Verificar-Copia.ps1")
+        cmd = os.path.join(ROOT, "media-layout", "VERIFICAR-COPIA.cmd")
+        text = open(ps, encoding="utf-8-sig").read()
+        self.assertTrue(text.startswith("#Requires -Version 5.1"))
+        self.assertIn("SHA256SUMS-AGVEXA.txt", text)
+        self.assertIn("Get-FileHash -Algorithm SHA256", text)
+        for verb in ("Remove-Item", "Set-Content", "Out-File", "Move-Item", "Copy-Item", "New-Item"):
+            self.assertNotIn(verb, text, "o verificador deve ser somente leitura")
+        raw = open(cmd, "rb").read()
+        self.assertIn(b"\r\n", raw)
+        self.assertIn(b"AGVexa\\Verificar-Copia.ps1", raw)
+        self.assertIn(b"-ExecutionPolicy Bypass", raw)
 
     def test_strip_code_helper(self):
         self.assertEqual(strip_code("a # {\n'{'\"$(x)}\"<# ( #>"), "a \n''''")

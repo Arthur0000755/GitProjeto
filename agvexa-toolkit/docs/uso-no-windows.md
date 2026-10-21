@@ -73,22 +73,22 @@ CrystalDiskInfo (portátil, site oficial). Disco com "Cuidado"/"Ruim" → não u
 
 ## 6. Conferir a cópia
 
-No PowerShell (troque `F:` pela letra da unidade Ventoy):
+Na raiz do HD, dê **duplo clique em `VERIFICAR-COPIA.cmd`**. Ele abre uma janela, confere o
+SHA-256 de cada arquivo listado em `SHA256SUMS-AGVEXA.txt` e termina com:
+
+- **CÓPIA ÍNTEGRA** → tudo certo; ou
+- linhas **[AUSENTE]** / **[FALHOU]** → copie de novo esses arquivos e repita.
+
+A conferência só lê os arquivos (não altera nada). ISOs grandes deixam o processo demorado
+(minutos). Para uma conferência rápida sem as ISOs, no PowerShell:
 
 ```powershell
-cd F:\
-$falhas = 0
-Get-Content .\SHA256SUMS-AGVEXA.txt | ForEach-Object {
-    $hash, $arquivo = $_ -split '  ', 2
-    if (-not (Test-Path -LiteralPath $arquivo)) { "AUSENTE: $arquivo"; $falhas++; return }
-    if ((Get-FileHash -Algorithm SHA256 -LiteralPath $arquivo).Hash.ToLower() -ne $hash) {
-        "FALHOU: $arquivo"; $falhas++
-    }
-}
-if ($falhas -eq 0) { "CÓPIA ÍNTEGRA" } else { "$falhas problema(s): copie de novo os arquivos listados" }
+powershell -NoProfile -ExecutionPolicy Bypass -File F:\AGVexa\Verificar-Copia.ps1 -SemISOs
 ```
 
-ISOs grandes deixam a conferência demorada (minutos). É normal.
+(troque `F:` pela letra da unidade Ventoy). O script fica em `AGVexa\Verificar-Copia.ps1`.
+Se o Windows avisar que o arquivo veio de outro computador, clique em **Executar mesmo assim**
+somente se a cópia veio do seu servidor.
 
 Para desconectar: **Remover hardware com segurança**.
 
@@ -126,6 +126,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\tests\Invoke-AGVexaSelfTes
 
 1. No servidor: atualize ISOs/arquivos, rode `verify-isos.sh` e `prepare-staging.sh --iso-mode copy`.
 2. No Windows: copie a nova `staging` por cima do conteúdo do HD (o Ventoy **não** precisa ser
-   reinstalado) e repita a conferência da seção 6.
+   reinstalado) e rode de novo o `VERIFICAR-COPIA.cmd`.
 3. Atualizar o próprio Ventoy: `Ventoy2Disk.exe` → **Update** (preserva os arquivos; mantenha
    a cópia mestre no HD de 1 TB mesmo assim).

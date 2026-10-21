@@ -187,6 +187,7 @@ class StagingTests(unittest.TestCase):
         for p in ("ventoy/ventoy.json", "ventoy/ventoy_grub.cfg", "ventoy/themes/agvexa/theme.txt",
                   "ventoy/themes/agvexa-lite/theme.txt", "AGVexa/.ventoyignore", "AGVexa/docs/manual-do-tecnico.md",
                   "AGVexa/windows-optimizer/AGVexa-Optimizer.ps1", "AGVexa/VERSION", "LEIA-ME.txt",
+                  "VERIFICAR-COPIA.cmd", "AGVexa/Verificar-Copia.ps1",
                   "SHA256SUMS-AGVEXA.txt", ".agvexa-staging"):
             self.assertTrue(os.path.exists(os.path.join(self.out, p)), p)
         for c in agvexa.load_categories()["categorias"]:
