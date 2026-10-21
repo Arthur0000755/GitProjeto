@@ -5,6 +5,8 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 ## [Não lançado]
 
 ### Adicionado
+- `docs/uso-no-windows.md`: fluxo servidor → Windows → HD (Ventoy2Disk.exe, cópia, conferência
+  por PowerShell, teste de boot, autoteste do Optimizer na estação LTSC).
 - `docs/hd-arquivo-1tb.md`: guia para criptografar e organizar o HD de 1 TB da empresa (arquivo +
   backups de clientes) sem perder dados. Toolkit passa a usar o HD de 320 GB.
 - Pastas de apoio na raiz da mídia: `DRIVERS`, `INSTALADORES`, `FERRAMENTAS`, `BIOS_FIRMWARE`,

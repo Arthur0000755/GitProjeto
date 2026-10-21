@@ -26,7 +26,8 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 1. No servidor: `bash scripts/preflight.sh` e `bash scripts/test-boot.sh`.
 2. Baixar as ISOs oficiais, preencher `catalog/isos-manifest.json` com SHA‑256 **oficiais**, `verify-isos.sh`.
 3. (Com autorização) instalar QEMU/OVMF ou usar outro computador; executar `test-boot.sh --plan` e VM‑1 a VM‑9.
-4. Testar o Windows Optimizer em VM Windows 10/11 (W‑1 a W‑13).
+4. Testar o Windows Optimizer: primeiro o autoteste na estação Windows 10 Enterprise LTSC
+   (`docs/uso-no-windows.md` §8), depois W‑1 a W‑13 em VM.
 5. Ajustar tema conforme capturas reais.
 6. Preparar o HD de 1 TB: SMART, cópia de segurança, criptografia e organização (`docs/hd-arquivo-1tb.md`).
 7. Fase F no HD de **320 GB** com o proprietário (`docs/instalacao-segura.md`), depois testes HW‑1 a HW‑5.
@@ -53,5 +54,6 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 
 - 2026-10-14 — 0.1.0-rc1: implementação inicial das Fases A–E e do Windows Optimizer.
 - 2026-10-15 — logomarca oficial integrada ao tema do boot, papéis de parede e relatório do Optimizer.
+- 2026-10-21 — guia `docs/uso-no-windows.md` (estação Windows 10 Enterprise LTSC: Ventoy2Disk.exe, cópia, conferência, autoteste do Optimizer).
 - 2026-10-15 — decisão de discos: 320 GB = toolkit; 1 TB = arquivo criptografado da empresa com backups de clientes.
 - 2026-10-15 — pastas de apoio (DRIVERS, INSTALADORES, FERRAMENTAS, BIOS_FIRMWARE) e política de dados de clientes fora da mídia.

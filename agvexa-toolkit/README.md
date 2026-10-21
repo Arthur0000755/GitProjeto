@@ -73,6 +73,7 @@ conferido entram por padrão.
 
 - [Arquitetura e decisões](docs/arquitetura.md)
 - [Manual do Técnico](docs/manual-do-tecnico.md) · [Procedimentos de atendimento](docs/procedimentos-de-atendimento.md)
+- [Usando a partir do Windows (passo a passo)](docs/uso-no-windows.md)
 - [Instalação segura no HD (Fase F)](docs/instalacao-segura.md) · [HD de arquivo da empresa (1 TB)](docs/hd-arquivo-1tb.md)
 - [Windows Optimizer](docs/windows-optimizer.md)
 - [Riscos e limitações](docs/riscos-e-limitacoes.md) · [Segurança](docs/relatorio-de-seguranca.md) · [Licenças](docs/licencas.md)
