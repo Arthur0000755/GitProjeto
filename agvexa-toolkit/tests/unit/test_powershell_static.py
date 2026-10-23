@@ -16,6 +16,19 @@ SCRIPTS = ["AGVexa-Optimizer.ps1", "Get-AGVexaSystemInfo.ps1", "Test-AGVexaOptim
            "Invoke-AGVexaOptimization.ps1", "Restore-AGVexaSettings.ps1", "New-AGVexaReport.ps1"]
 
 
+# Aliases padrão do Windows PowerShell 5.1 (Get-Alias numa instalação limpa).
+PS51_DEFAULT_ALIASES = set("""
+% ? ac asnp cat cd chdir clc clear clhy cli clp cls clv cnsn compare copy cp cpi cpp curl cvpa
+dbp del diff dir dnsn ebp echo epal epcsv epsn erase etsn exsn fc fhx fl foreach ft fw gal gbp
+gc gcb gci gcm gcs gdr ghy gi gin gjb gl gm gmo gp gps gpv group gsn gsnp gsv gtz gu gv gwmi h
+history icm iex ihy ii ipal ipcsv ipmo ipsn irm ise iwmi iwr kill lp ls man md measure mi mount
+move mp mv nal ndr ni nmo npssc nsn nv ogv oh popd ps pushd pwd r rbp rcjb rcsn rd rdr ren ri
+rjb rm rmdir rmo rni rnp rp rsn rsnp rujb rv rvpa rwmi sajb sal saps sasv sbp sc scb select set
+shcm si sl sleep sls sort sp spjb spps spsv start stz sujb sv swmi tee trcm type wget where wjb
+write
+""".split())
+
+
 def ps_files():
     for base in (WO, os.path.join(ROOT, "media-layout")):
         for p in _ps_files_in(base):
@@ -130,6 +143,22 @@ class PowerShellStaticTests(unittest.TestCase):
             for pat in (r"\?\?", r"\?\.", r"-AsHashtable", r"\s&&\s", r"\s\|\|\s", r"-Parallel\b",
                         r"\$IsWindows\b", r"-AdditionalChildPath"):
                 self.assertIsNone(re.search(pat, code, re.M), "%s usa sintaxe/recurso do PS7: %s" % (p, pat))
+
+    def test_function_names_do_not_shadow_builtin_aliases(self):
+        # No PowerShell, alias tem precedência sobre função: "function H" vira Get-History (alias h).
+        for p in ps_files():
+            code = strip_code(open(p, encoding="utf-8-sig").read())
+            for name in re.findall(r"(?im)^\s*function\s+([\w-]+)", code):
+                self.assertNotIn(name.lower(), PS51_DEFAULT_ALIASES,
+                                 "%s: função '%s' tem o nome de um alias padrão" % (os.path.basename(p), name))
+
+    def test_no_include_with_literalpath(self):
+        # Get-ChildItem -LiteralPath ignora -Include no PowerShell 5.1.
+        for p in ps_files():
+            code = strip_code(open(p, encoding="utf-8-sig").read())
+            for line in code.splitlines():
+                self.assertFalse("-LiteralPath" in line and re.search(r"-Include\b", line),
+                                 "%s: -Include com -LiteralPath: %s" % (os.path.basename(p), line.strip()))
 
     def test_default_is_analysis_only(self):
         text = open(os.path.join(WO, "Invoke-AGVexaOptimization.ps1"), encoding="utf-8-sig").read()

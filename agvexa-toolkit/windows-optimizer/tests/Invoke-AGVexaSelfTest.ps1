@@ -47,7 +47,8 @@ Write-Host 'AG Vexa Windows Optimizer - autoteste' -ForegroundColor Cyan
 Write-Host ("PowerShell {0} | {1}" -f $PSVersionTable.PSVersion, [Environment]::OSVersion.VersionString)
 
 Write-Host "`n[1] Sintaxe"
-$files = @(Get-ChildItem -LiteralPath $root -Recurse -Include *.ps1, *.psm1 -File)
+# -Include é ignorado com -LiteralPath no PowerShell 5.1: filtrar pela extensão
+$files = @(Get-ChildItem -LiteralPath $root -Recurse -File | Where-Object { $_.Extension -in '.ps1', '.psm1' })
 foreach ($f in $files) {
     Check ("parse {0}" -f $f.Name) {
         $tokens = $null; $errors = $null
