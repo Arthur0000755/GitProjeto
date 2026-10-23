@@ -57,7 +57,7 @@ Testes unitários:
 | Teste | Resultado |
 |---|---|
 | Análise estática no Linux | Testado e aprovado |
-| Autoteste `Invoke-AGVexaSelfTest.ps1` como administrador — 2026-10-23, Windows 10 build 17763 (Enterprise LTSC), PowerShell 5.1.17763 | 1ª execução: 36 passou, 8 falhou, 1 pulado (causas abaixo). **Reexecução após correções (2026-10-23): Testado e aprovado — 38 passou, 0 falhou, 1 pulado** (`-CicloReal`, só em VM) |
+| Autoteste `Invoke-AGVexaSelfTest.ps1` como administrador — 2026-10-23, Windows 10 build 17763 (Enterprise LTSC), PowerShell 5.1.17763 | 1ª execução: 36 passou, 8 falhou, 1 pulado (causas abaixo). **Reexecução após correções (2026-10-23): Testado e aprovado — 38 passou, 0 falhou, 1 pulado** (`-CicloReal`, só em VM). **Após a correção do `-WhatIf` (PR #6): 39 passou, 0 falhou, 1 pulado** |
 | Autoteste como usuário comum — 2026-10-23, mesma estação | **Testado e aprovado** — 38 passou, 0 falhou, 1 pulado; ajustes que exigem admin corretamente ignorados |
 | Execução completa em Windows 10/11 (análise, simulação, WhatIf, reversão, repetição, erros, relatórios) | **Não testado** — plano W‑1 a W‑13 em `windows-optimizer.md` |
 
