@@ -86,7 +86,7 @@ class SecurityScanTests(unittest.TestCase):
         self.assertEqual(self.scan(paths, PYTHON_FORBIDDEN, strip_python), [])
 
     def test_powershell_has_no_forbidden_operations(self):
-        paths = list(files("windows-optimizer", (".ps1", ".psm1")))
+        paths = list(files("windows-optimizer", (".ps1", ".psm1"))) + list(files("media-layout", (".ps1",)))
         self.assertTrue(paths, "nenhum script PowerShell encontrado")
 
         def allow(path, pat, m):

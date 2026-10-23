@@ -14,7 +14,7 @@ Resultado: **22 verificações passaram, 0 falharam, 2 puladas.**
 | `bash -n` em todos os `.sh` (8 arquivos) | Testado e aprovado | |
 | shellcheck | **Não testado** | ferramenta não instalada |
 | `--help` e rejeição de opção inválida (código 64) em 6 scripts | Testado e aprovado | |
-| Testes unitários Python: **89 testes** | Testado e aprovado | detalhes abaixo |
+| Testes unitários Python: **92 testes** | Testado e aprovado | detalhes abaixo |
 | `validate-config.sh` do projeto | Testado e aprovado | 0 erros; 1 aviso esperado (manifesto real ainda não criado) |
 | Sintaxe PowerShell com `pwsh` | **Não testado** | pwsh não instalado; coberto parcialmente pela análise estática |
 
@@ -26,7 +26,7 @@ Testes unitários:
 | `test_theme.py` | 24 | os dois temas válidos e com versão; analisador de `theme.txt`; erros de chaves, propriedades, cores, imagens; PNG entrelaçado/16 bits/paleta/inválido recusados; ícones de todas as classes; menu F6 válido, comandos de boot proibidos, chaves desbalanceadas |
 | `test_isos_and_staging.py` | 25 | status VERIFICADA/DIVERGENTE/NAO_VERIFICADA/TIPO_INVALIDO/AUSENTE/TAMANHO_DIVERGENTE/DESABILITADA/NAO_CATALOGADA; checksums oficiais GNU e BSD; detecção MBR/GPT; cache; staging só com verificadas; `[NÃO VERIFICADA]`; DIVERGENTE nunca entra; layout; SHA256SUMS; links; pastas de apoio e extras/; recusa de CLIENTES; `--dry-run`; recusas (fora de `build/`, `/dev`, link simbólico, diretório não marcado) |
 | `test_security.py` | 7 | varredura de comandos destrutivos (shell, Python, PowerShell), catálogo do Optimizer, autoteste do próprio scanner, ausência de arquivos grandes/ISOs, `.gitignore` |
-| `test_powershell_static.py` | 12 | BOM UTF‑8, cabeçalhos/ajuda, WhatIf, blocos balanceados, ausência de sintaxe exclusiva do PS7, padrão "somente análise", ordem dos 12 passos, opções do menu, versão, catálogo |
+| `test_powershell_static.py` | 15 | BOM UTF‑8, nomes de função × aliases padrão, `-Include` com `-LiteralPath`, cabeçalhos/ajuda, verificador da cópia (`Verificar-Copia.ps1`), WhatIf, blocos balanceados, ausência de sintaxe exclusiva do PS7, padrão "somente análise", ordem dos 12 passos, opções do menu, versão, catálogo |
 
 ## 2. Ensaios manuais (linha de comando)
 
@@ -57,10 +57,22 @@ Testes unitários:
 | Teste | Resultado |
 |---|---|
 | Análise estática no Linux | Testado e aprovado |
-| Sintaxe pelo parser do PowerShell | **Não testado** |
-| Execução em Windows 10/11 (sem e com privilégios, análise, simulação, WhatIf, reversão, repetição, erros, relatórios) | **Não testado** — plano W‑1 a W‑13 em `windows-optimizer.md` |
+| Autoteste `Invoke-AGVexaSelfTest.ps1` como administrador — 2026-10-23, Windows 10 build 17763 (Enterprise LTSC), PowerShell 5.1.17763 | **Com ressalvas**: 36 passou, 8 falhou, 1 pulado. Causas corrigidas (ver abaixo); **reexecução pendente** |
+| Autoteste como usuário comum | **Não testado** |
+| Execução completa em Windows 10/11 (análise, simulação, WhatIf, reversão, repetição, erros, relatórios) | **Não testado** — plano W‑1 a W‑13 em `windows-optimizer.md` |
 
-**Versões do Windows efetivamente testadas: nenhuma.**
+Falhas da primeira execução real e correções:
+
+1. Sintaxe e codificação (6 falhas): o autoteste também conferia `LEIA-ME.md`, `ajustes.json` e
+   `agvexa-logo.png`, porque `Get-ChildItem -LiteralPath ... -Include` ignora o `-Include` no
+   PowerShell 5.1. Os scripts em si passaram. Correção: filtro pela extensão.
+2. Relatório HTML/Markdown e `-Aplicar -WhatIf` (2 falhas): a função auxiliar `H` de
+   `New-AGVexaReport.ps1` era encoberta pelo alias padrão `h` (`Get-History`), que tem precedência
+   sobre funções. Correção: função renomeada para `ConvertTo-AGVexaHtml`.
+
+Os dois casos ganharam testes estáticos (nomes de função × aliases padrão; `-Include` com `-LiteralPath`).
+
+**Versões do Windows efetivamente testadas: Windows 10 Enterprise LTSC build 17763 (só o autoteste, como administrador).**
 
 ## 5. Critérios de aceitação (seção 16 do pedido)
 

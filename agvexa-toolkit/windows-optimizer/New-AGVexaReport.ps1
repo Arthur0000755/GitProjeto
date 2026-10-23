@@ -54,7 +54,7 @@ function Read-Optional([string]$name) {
     $f = Join-Path $path $name
     if (Test-Path -LiteralPath $f) { Read-AGVexaJson -Path $f } else { $null }
 }
-function H([object]$text) { [System.Net.WebUtility]::HtmlEncode([string]$text) }
+function ConvertTo-AGVexaHtml([object]$text) { [System.Net.WebUtility]::HtmlEncode([string]$text) }
 
 $diag = Read-Optional 'diagnostico.json'
 $plan = Read-Optional 'plano.json'
@@ -158,21 +158,21 @@ footer{color:var(--sec);font-size:12px;padding:16px 32px}
     }
     [void]$sb.AppendFormat('<header>{0}<h1>Relatório técnico - Windows Optimizer</h1>{1}</header><main>', $brand, $tagline)
     [void]$sb.Append('<table class="meta">')
-    foreach ($k in $header.Keys) { [void]$sb.AppendFormat('<tr><th>{0}</th><td>{1}</td></tr>', (H $k), (H $header[$k])) }
+    foreach ($k in $header.Keys) { [void]$sb.AppendFormat('<tr><th>{0}</th><td>{1}</td></tr>', (ConvertTo-AGVexaHtml $k), (ConvertTo-AGVexaHtml $header[$k])) }
     [void]$sb.Append('</table>')
     $current = $null
     foreach ($r in $rows) {
         if ($r[0] -ne $current) {
             if ($current) { [void]$sb.Append('</table>') }
             $current = $r[0]
-            [void]$sb.AppendFormat('<h2>{0}</h2><table>', (H $current))
+            [void]$sb.AppendFormat('<h2>{0}</h2><table>', (ConvertTo-AGVexaHtml $current))
         }
-        [void]$sb.AppendFormat('<tr class="{0}"><th>{1}</th><td>{2}</td></tr>', $r[3], (H $r[1]), (H $r[2]))
+        [void]$sb.AppendFormat('<tr class="{0}"><th>{1}</th><td>{2}</td></tr>', $r[3], (ConvertTo-AGVexaHtml $r[1]), (ConvertTo-AGVexaHtml $r[2]))
     }
     if ($current) { [void]$sb.Append('</table>') }
     [void]$sb.Append('<h2>Observações do técnico</h2><p>&nbsp;</p><p>&nbsp;</p>')
     [void]$sb.Append('<div class="ass"><div>Técnico responsável</div><div>Cliente (ciente das alterações)</div></div></main>')
-    [void]$sb.AppendFormat('<footer>Gerado localmente por AG Vexa Windows Optimizer {0}. Nenhum dado foi enviado para a internet.</footer></body></html>', (H $version))
+    [void]$sb.AppendFormat('<footer>Gerado localmente por AG Vexa Windows Optimizer {0}. Nenhum dado foi enviado para a internet.</footer></body></html>', (ConvertTo-AGVexaHtml $version))
     $html = Join-Path $path 'relatorio.html'
     [System.IO.File]::WriteAllText($html, $sb.ToString(), (New-Object System.Text.UTF8Encoding($true)))
     $written += $html

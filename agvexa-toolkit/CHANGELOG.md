@@ -4,7 +4,17 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 
 ## [Não lançado]
 
+### Corrigido
+- Windows Optimizer (primeira execução real, Windows 10 LTSC build 17763): relatório HTML/Markdown
+  falhava porque a função `H` era encoberta pelo alias `h` (`Get-History`); renomeada para
+  `ConvertTo-AGVexaHtml`. O autoteste conferia arquivos que não são PowerShell (`-Include` é
+  ignorado com `-LiteralPath` no PS 5.1). Novos testes estáticos para os dois casos.
+
 ### Adicionado
+- `VERIFICAR-COPIA.cmd` + `AGVexa/Verificar-Copia.ps1` na raiz da mídia: conferência da cópia por
+  duplo clique no Windows (somente leitura; `-SemISOs` para conferência rápida).
+- `docs/uso-no-windows.md`: fluxo servidor → Windows → HD (Ventoy2Disk.exe, cópia, conferência
+  por PowerShell, teste de boot, autoteste do Optimizer na estação LTSC).
 - `docs/hd-arquivo-1tb.md`: guia para criptografar e organizar o HD de 1 TB da empresa (arquivo +
   backups de clientes) sem perder dados. Toolkit passa a usar o HD de 320 GB.
 - Pastas de apoio na raiz da mídia: `DRIVERS`, `INSTALADORES`, `FERRAMENTAS`, `BIOS_FIRMWARE`,

@@ -8,6 +8,9 @@
 **Disco definido (decisão do proprietário, 2026-10-15): HD externo de 320 GB.** O HD de
 1 TB passa a ser o arquivo da empresa, com os backups de clientes (`hd-arquivo-1tb.md`).
 
+> Preparando pelo **Windows** (Ventoy2Disk.exe)? Siga `uso-no-windows.md`; os cuidados
+> deste documento (backup, identificação do disco, confirmação) continuam valendo.
+
 Pré-requisitos
 
 - Staging gerado e validado: `scripts/prepare-staging.sh` e
