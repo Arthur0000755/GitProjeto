@@ -14,7 +14,7 @@ Resultado: **22 verificações passaram, 0 falharam, 2 puladas.**
 | `bash -n` em todos os `.sh` (8 arquivos) | Testado e aprovado | |
 | shellcheck | **Não testado** | ferramenta não instalada |
 | `--help` e rejeição de opção inválida (código 64) em 6 scripts | Testado e aprovado | |
-| Testes unitários Python: **92 testes** | Testado e aprovado | detalhes abaixo |
+| Testes unitários Python: **93 testes** | Testado e aprovado | detalhes abaixo |
 | `validate-config.sh` do projeto | Testado e aprovado | 0 erros; 1 aviso esperado (manifesto real ainda não criado) |
 | Sintaxe PowerShell com `pwsh` | **Não testado** | pwsh não instalado; coberto parcialmente pela análise estática |
 
@@ -26,7 +26,7 @@ Testes unitários:
 | `test_theme.py` | 24 | os dois temas válidos e com versão; analisador de `theme.txt`; erros de chaves, propriedades, cores, imagens; PNG entrelaçado/16 bits/paleta/inválido recusados; ícones de todas as classes; menu F6 válido, comandos de boot proibidos, chaves desbalanceadas |
 | `test_isos_and_staging.py` | 25 | status VERIFICADA/DIVERGENTE/NAO_VERIFICADA/TIPO_INVALIDO/AUSENTE/TAMANHO_DIVERGENTE/DESABILITADA/NAO_CATALOGADA; checksums oficiais GNU e BSD; detecção MBR/GPT; cache; staging só com verificadas; `[NÃO VERIFICADA]`; DIVERGENTE nunca entra; layout; SHA256SUMS; links; pastas de apoio e extras/; recusa de CLIENTES; `--dry-run`; recusas (fora de `build/`, `/dev`, link simbólico, diretório não marcado) |
 | `test_security.py` | 7 | varredura de comandos destrutivos (shell, Python, PowerShell), catálogo do Optimizer, autoteste do próprio scanner, ausência de arquivos grandes/ISOs, `.gitignore` |
-| `test_powershell_static.py` | 15 | BOM UTF‑8, nomes de função × aliases padrão, `-Include` com `-LiteralPath`, cabeçalhos/ajuda, verificador da cópia (`Verificar-Copia.ps1`), WhatIf, blocos balanceados, ausência de sintaxe exclusiva do PS7, padrão "somente análise", ordem dos 12 passos, opções do menu, versão, catálogo |
+| `test_powershell_static.py` | 16 | BOM UTF‑8, nomes de função × aliases padrão, `$PSScriptRoot` fora de `param()`, `-Include` com `-LiteralPath`, cabeçalhos/ajuda, verificador da cópia (`Verificar-Copia.ps1`), WhatIf, blocos balanceados, ausência de sintaxe exclusiva do PS7, padrão "somente análise", ordem dos 12 passos, opções do menu, versão, catálogo |
 
 ## 2. Ensaios manuais (linha de comando)
 
@@ -76,7 +76,7 @@ Os dois casos ganharam testes estáticos (nomes de função × aliases padrão; 
 
 | Teste | Resultado |
 |---|---|
-| Pasta de teste — 2026-10-23, mesma estação | **Testado e aprovado**: cópia íntegra, arquivo alterado (`[FALHOU]`), arquivo ausente (`[AUSENTE]`), recuperação e lista ausente (`[ERRO]`). `-SemISOs`: **não testado** |
+| Pasta de teste — 2026-10-23, mesma estação | **Testado e aprovado**: cópia íntegra, arquivo alterado (`[FALHOU]`), arquivo ausente (`[AUSENTE]`), recuperação e lista ausente (`[ERRO]`). `-SemISOs` chamado direto com `powershell -File`: **falhou** (`$PSScriptRoot` vazio no valor padrão de `-Raiz`, PS 5.1); corrigido, **reteste pendente** |
 
 **Versões do Windows efetivamente testadas: Windows 10 Enterprise LTSC build 17763 (autoteste do Optimizer como administrador e como usuário comum, e verificador da cópia; aprovados).**
 

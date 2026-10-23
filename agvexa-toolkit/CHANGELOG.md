@@ -5,6 +5,9 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 ## [Não lançado]
 
 ### Corrigido
+- `Verificar-Copia.ps1` chamado direto (`powershell -File ... -SemISOs`) falhava no PS 5.1:
+  `$PSScriptRoot` fica vazio no valor padrão de `param()`. A pasta padrão agora é calculada no
+  corpo do script, e a linha "Pasta" mostra o caminho sem `\.`. Novo teste estático.
 - Optimizer com `-WhatIf` (ou sem nenhum ajuste aplicado): o passo 12/12 e o relatório não
   oferecem mais "Para desfazer"/"Como desfazer"; o relatório mostra o modo "WhatIf (nada alterado)".
   Autoteste ganhou a verificação correspondente.
