@@ -11,7 +11,7 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 | C — Biblioteca e preparação | ✅ concluída (catálogo, manifesto, verificação SHA‑256, staging) |
 | D — Testes automatizados | ✅ concluída para o disponível (92 testes unitários + 22 verificações; VM/pwsh/shellcheck indisponíveis) |
 | E — Documentação e entrega | ✅ concluída (manual, procedimentos, checklists, relatórios) |
-| Complemento — Windows Optimizer | ✅ implementado; autoteste aprovado no Windows 10 LTSC 17763 como admin (38/0); faltam usuário comum e W‑1 a W‑13 em VM |
+| Complemento — Windows Optimizer | ✅ implementado; autoteste aprovado no Windows 10 LTSC 17763 como admin e como usuário comum (38/0); faltam W‑1 a W‑13 em VM |
 | F — Instalação no HD real | ⛔ NÃO executada (aguarda autorização) |
 
 ## Onde o projeto está
