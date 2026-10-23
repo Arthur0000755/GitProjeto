@@ -29,6 +29,9 @@ param(
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
 
+# Caminho limpo (o .cmd passa "X:\.")
+if (Test-Path -LiteralPath $Raiz -PathType Container) { $Raiz = (Resolve-Path -LiteralPath $Raiz).ProviderPath }
+
 Write-Host ''
 Write-Host '  AG VEXA TOOLKIT - conferência da cópia' -ForegroundColor Cyan
 Write-Host ('  Pasta: {0}' -f $Raiz) -ForegroundColor Gray

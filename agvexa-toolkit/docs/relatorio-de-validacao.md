@@ -72,7 +72,13 @@ Falhas da primeira execução real e correções:
 
 Os dois casos ganharam testes estáticos (nomes de função × aliases padrão; `-Include` com `-LiteralPath`).
 
-**Versões do Windows efetivamente testadas: Windows 10 Enterprise LTSC build 17763 (só o autoteste, como administrador e como usuário comum; aprovado).**
+**Verificador da cópia** (`VERIFICAR-COPIA.cmd`)
+
+| Teste | Resultado |
+|---|---|
+| Pasta de teste — 2026-10-23, mesma estação | **Testado e aprovado**: cópia íntegra, arquivo alterado (`[FALHOU]`), arquivo ausente (`[AUSENTE]`), recuperação e lista ausente (`[ERRO]`). `-SemISOs`: **não testado** |
+
+**Versões do Windows efetivamente testadas: Windows 10 Enterprise LTSC build 17763 (autoteste do Optimizer como administrador e como usuário comum, e verificador da cópia; aprovados).**
 
 ## 5. Critérios de aceitação (seção 16 do pedido)
 
