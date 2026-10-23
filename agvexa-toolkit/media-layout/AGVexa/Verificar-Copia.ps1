@@ -22,12 +22,17 @@
 #>
 [CmdletBinding()]
 param(
-    [string]$Raiz = (Split-Path -Parent $PSScriptRoot),
+    [string]$Raiz,
     [switch]$SemISOs
 )
 
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
+
+# $PSScriptRoot fica vazio nos valores padrão do param() quando o script é chamado com -File (PS 5.1)
+if (-not $Raiz) { $Raiz = Split-Path -Parent $PSScriptRoot }
+# Caminho limpo (o .cmd passa "X:\.")
+if (Test-Path -LiteralPath $Raiz -PathType Container) { $Raiz = (Resolve-Path -LiteralPath $Raiz).ProviderPath }
 
 Write-Host ''
 Write-Host '  AG VEXA TOOLKIT - conferência da cópia' -ForegroundColor Cyan

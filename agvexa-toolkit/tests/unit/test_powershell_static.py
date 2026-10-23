@@ -152,6 +152,20 @@ class PowerShellStaticTests(unittest.TestCase):
                 self.assertNotIn(name.lower(), PS51_DEFAULT_ALIASES,
                                  "%s: função '%s' tem o nome de um alias padrão" % (os.path.basename(p), name))
 
+    def test_no_psscriptroot_in_param_defaults(self):
+        # $PSScriptRoot chega vazio nos valores padrão de param() com "powershell -File" (PS 5.1).
+        for p in ps_files():
+            code = strip_code(open(p, encoding="utf-8-sig").read())
+            m = re.search(r"(?i)\bparam\s*\(", code)
+            if not m:
+                continue
+            i, depth = m.end(), 1
+            while depth and i < len(code):
+                depth += {"(": 1, ")": -1}.get(code[i], 0)
+                i += 1
+            self.assertNotIn("$psscriptroot", code[m.start():i].lower(),
+                             "%s: $PSScriptRoot no bloco param()" % os.path.basename(p))
+
     def test_no_include_with_literalpath(self):
         # Get-ChildItem -LiteralPath ignora -Include no PowerShell 5.1.
         for p in ps_files():

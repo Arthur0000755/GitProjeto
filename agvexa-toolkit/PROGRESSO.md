@@ -9,9 +9,9 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 | A — Pesquisa e arquitetura | ✅ concluída (Ventoy 1.1.18 confirmado no código-fonte; `docs/arquitetura.md`) |
 | B — Personalização visual | ✅ concluída (temas `agvexa` e `agvexa-lite`, 18 ícones, fundos; renderização real **não testada**) |
 | C — Biblioteca e preparação | ✅ concluída (catálogo, manifesto, verificação SHA‑256, staging) |
-| D — Testes automatizados | ✅ concluída para o disponível (92 testes unitários + 22 verificações; VM/pwsh/shellcheck indisponíveis) |
+| D — Testes automatizados | ✅ concluída para o disponível (93 testes unitários + 22 verificações; VM/pwsh/shellcheck indisponíveis) |
 | E — Documentação e entrega | ✅ concluída (manual, procedimentos, checklists, relatórios) |
-| Complemento — Windows Optimizer | ✅ implementado; autoteste aprovado no Windows 10 LTSC 17763 como admin e como usuário comum (38/0); faltam W‑1 a W‑13 em VM |
+| Complemento — Windows Optimizer | ✅ implementado; autoteste aprovado no Windows 10 LTSC 17763 como admin e como usuário comum (38/0; 39/0 após a correção do `-WhatIf`); faltam W‑1 a W‑13 em VM |
 | F — Instalação no HD real | ⛔ NÃO executada (aguarda autorização) |
 
 ## Onde o projeto está
