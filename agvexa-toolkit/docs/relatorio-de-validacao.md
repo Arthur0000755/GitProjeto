@@ -76,7 +76,7 @@ Os dois casos ganharam testes estáticos (nomes de função × aliases padrão; 
 
 | Teste | Resultado |
 |---|---|
-| Pasta de teste — 2026-10-23, mesma estação | **Testado e aprovado**: cópia íntegra, arquivo alterado (`[FALHOU]`), arquivo ausente (`[AUSENTE]`), recuperação e lista ausente (`[ERRO]`). `-SemISOs` chamado direto com `powershell -File`: **falhou** (`$PSScriptRoot` vazio no valor padrão de `-Raiz`, PS 5.1); corrigido, **reteste pendente** |
+| Pasta de teste — 2026-10-23, mesma estação | **Testado e aprovado**: cópia íntegra, arquivo alterado (`[FALHOU]`), arquivo ausente (`[AUSENTE]`), recuperação e lista ausente (`[ERRO]`). `-SemISOs` chamado direto com `powershell -File`: **falhou** (`$PSScriptRoot` vazio no valor padrão de `-Raiz`, PS 5.1); corrigido e **retestado: aprovado** (4 conferidos, ISOs puladas, caminho sem `\.`; o próprio script substituído apareceu como `[FALHOU]`, como esperado) |
 
 **Versões do Windows efetivamente testadas: Windows 10 Enterprise LTSC build 17763 (autoteste do Optimizer como administrador e como usuário comum, e verificador da cópia; aprovados).**
 
