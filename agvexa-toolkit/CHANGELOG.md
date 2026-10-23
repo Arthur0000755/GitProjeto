@@ -5,6 +5,9 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 ## [Não lançado]
 
 ### Corrigido
+- Optimizer com `-WhatIf` (ou sem nenhum ajuste aplicado): o passo 12/12 e o relatório não
+  oferecem mais "Para desfazer"/"Como desfazer"; o relatório mostra o modo "WhatIf (nada alterado)".
+  Autoteste ganhou a verificação correspondente.
 - Windows Optimizer (primeira execução real, Windows 10 LTSC build 17763): relatório HTML/Markdown
   falhava porque a função `H` era encoberta pelo alias `h` (`Get-History`); renomeada para
   `ConvertTo-AGVexaHtml`. O autoteste conferia arquivos que não são PowerShell (`-Include` é

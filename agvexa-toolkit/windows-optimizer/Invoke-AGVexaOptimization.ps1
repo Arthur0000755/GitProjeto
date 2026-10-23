@@ -189,7 +189,12 @@ Write-AGVexaStatus -Level 'PASSO' -Message ("11/12 Relatório em {0}" -f (Join-P
 
 # 12. Reversão disponível
 $failed = @($results | Where-Object { $_.resultado -eq 'FALHOU' }).Count
-Write-AGVexaStatus -Level 'PASSO' -Message ("12/12 Para desfazer: .\Restore-AGVexaSettings.ps1 -Sessao '{0}'" -f $session.Id)
+$applied = @($results | Where-Object { $_.resultado -eq 'APLICADO_E_VERIFICADO' }).Count
+if ($applied) {
+    Write-AGVexaStatus -Level 'PASSO' -Message ("12/12 Para desfazer: .\Restore-AGVexaSettings.ps1 -Sessao '{0}'" -f $session.Id)
+} else {
+    Write-AGVexaStatus -Level 'PASSO' -Message '12/12 Nada a desfazer: nenhum ajuste foi aplicado'
+}
 if ($failed) {
     Write-AGVexaStatus -Level 'AVISO' -Message ("{0} ajuste(s) falharam; veja o relatório. Nada foi declarado como sucesso sem verificação." -f $failed)
     exit 1

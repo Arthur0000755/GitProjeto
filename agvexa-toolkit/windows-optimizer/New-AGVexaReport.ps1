@@ -109,13 +109,15 @@ if ($plan) {
     }
 }
 if ($exec) {
-    Add-Row 'Execução' 'Modo' $(if ($exec.aplicar) { 'aplicação com confirmação' } else { 'simulação (nada alterado)' })
+    $whatIf = [bool](Get-AGVexaField $exec 'whatIf' $false)
+    Add-Row 'Execução' 'Modo' $(if (-not $exec.aplicar) { 'simulação (nada alterado)' } elseif ($whatIf) { 'WhatIf (nada alterado)' } else { 'aplicação com confirmação' })
     Add-Row 'Execução' 'Ponto de restauração' $exec.pontoRestauracao
     foreach ($r in @($exec.resultados)) {
         if ($null -eq $r) { continue }
         Add-Row 'Execução' $r.titulo ('{0} {1}' -f $r.resultado, $r.detalhe) $(if ($r.resultado -eq 'FALHOU') { 'alerta' } else { '' })
     }
-    if ($exec.aplicar) { Add-Row 'Execução' 'Como desfazer' (".\Restore-AGVexaSettings.ps1 -Sessao '{0}'" -f (Split-Path -Leaf $path)) }
+    $applied = @(@($exec.resultados) | Where-Object { $null -ne $_ -and $_.resultado -eq 'APLICADO_E_VERIFICADO' }).Count
+    if ($applied) { Add-Row 'Execução' 'Como desfazer' (".\Restore-AGVexaSettings.ps1 -Sessao '{0}'" -f (Split-Path -Leaf $path)) }
 }
 
 $sid = Split-Path -Leaf $path

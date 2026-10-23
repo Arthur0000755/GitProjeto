@@ -171,6 +171,12 @@ Check 'Invoke -Aplicar -WhatIf não altera valores' {
     & (Join-Path $root 'Invoke-AGVexaOptimization.ps1') -Perfil Desempenho -Aplicar -WhatIf -SemPontoDeRestauracao | Out-Null
     ((Get-AGVexaMinAnimate) -eq $visualBefore.min) -and ((Get-AGVexaSpiBool -Action 0x1042) -eq $visualBefore.client)
 }
+Check 'relatório do WhatIf não oferece reversão' {
+    $last = Get-ChildItem -LiteralPath (Join-Path (Get-AGVexaDataRoot) 'sessoes') -Directory |
+        Where-Object { $_.Name -like '*-otimizacao-*' } | Sort-Object Name | Select-Object -Last 1
+    $html = [System.IO.File]::ReadAllText((Join-Path $last.FullName 'relatorio.html'), [System.Text.Encoding]::UTF8)
+    ($html -match 'WhatIf \(nada alterado\)') -and ($html -notmatch 'Como desfazer')
+}
 Check 'execução repetida da avaliação é estável' {
     $a = & (Join-Path $root 'Test-AGVexaOptimization.ps1') -Perfil Desempenho -Sessao $sess.Path -SemTela
     $b = & (Join-Path $root 'Test-AGVexaOptimization.ps1') -Perfil Desempenho -Sessao $sess.Path -SemTela
