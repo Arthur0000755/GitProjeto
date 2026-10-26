@@ -1221,6 +1221,13 @@ def cmd_stage(args):
         actions.append(("criar", "pasta de categoria", d))
         if not dry:
             os.makedirs(d, exist_ok=True)
+            # Pasta vazia some em ZIP/cópias; o Ventoy ignora .txt, então a categoria
+            # continua oculta no menu até receber uma imagem.
+            with open(os.path.join(d, "LEIA-ME.txt"), "w", encoding="utf-8", newline="\r\n") as fh:
+                fh.write("AG VEXA TOOLKIT - %s\n\n%s\n%s\n\n"
+                         "Coloque aqui somente imagens (.iso/.img) da fonte oficial, com SHA-256 conferido.\n"
+                         "A categoria só aparece no menu de boot quando houver ao menos uma imagem.\n"
+                         % (c["alias"], c["dica1"], c["dica2"]))
     extras = [("docs", "AGVexa/docs"), ("templates", "AGVexa/modelos"),
               ("windows-optimizer", "AGVexa/windows-optimizer"), ("catalog", "AGVexa/catalogo")]
     for src, dst in extras:

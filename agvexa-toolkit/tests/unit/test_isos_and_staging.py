@@ -192,6 +192,8 @@ class StagingTests(unittest.TestCase):
             self.assertTrue(os.path.exists(os.path.join(self.out, p)), p)
         for c in agvexa.load_categories()["categorias"]:
             self.assertTrue(os.path.isdir(os.path.join(self.out, "ISO", c["id"])))
+            # pasta de categoria nunca vazia: pastas vazias somem em ZIP e cópias
+            self.assertTrue(os.path.isfile(os.path.join(self.out, "ISO", c["id"], "LEIA-ME.txt")), c["id"])
         r = quiet_report()
         agvexa.validate_staging(self.out, r)
         self.assertEqual(r.errors, [])

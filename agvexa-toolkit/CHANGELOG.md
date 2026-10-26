@@ -5,6 +5,9 @@ Formato baseado em "Keep a Changelog". Versões seguem SemVer.
 ## [Não lançado]
 
 ### Corrigido
+- Pastas de categoria em `ISO/` sumiam ao compactar/copiar o staging (estavam vazias). Cada
+  categoria agora tem um `LEIA-ME.txt` (o Ventoy ignora `.txt`; a categoria só aparece no menu
+  quando recebe uma imagem).
 - **Boot abortava com `unaligned pointer ... Aborted`** (primeiro teste real, BIOS legado):
   o tema principal e o `menu_tip` usavam posições decimais (`5.5%`, `60.5%`), que o GRUB não
   aceita. Agora são inteiros (`6%`, `60%`) e o validador recusa decimais em posições do tema e
