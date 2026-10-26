@@ -14,7 +14,7 @@ Resultado: **22 verificações passaram, 0 falharam, 2 puladas.**
 | `bash -n` em todos os `.sh` (8 arquivos) | Testado e aprovado | |
 | shellcheck | **Não testado** | ferramenta não instalada |
 | `--help` e rejeição de opção inválida (código 64) em 6 scripts | Testado e aprovado | |
-| Testes unitários Python: **93 testes** | Testado e aprovado | detalhes abaixo |
+| Testes unitários Python: **96 testes** | Testado e aprovado | detalhes abaixo |
 | `validate-config.sh` do projeto | Testado e aprovado | 0 erros; 1 aviso esperado (manifesto real ainda não criado) |
 | Sintaxe PowerShell com `pwsh` | **Não testado** | pwsh não instalado; coberto parcialmente pela análise estática |
 
@@ -47,10 +47,20 @@ Testes unitários:
 |---|---|
 | Renderização real do tema no GRUB/Ventoy | **Não testado** — a prévia em `docs/previews/` é uma simulação Pillow |
 | UEFI x86_64 | **Não testado** / Dependente de hardware físico |
-| BIOS legado | **Não testado** / Dependente de hardware físico |
+| BIOS legado — notebook STI 1414, Ventoy 1.1.17 e 1.1.18 (2026-10-26) | **Falhou** com o tema principal: `unaligned pointer 0x15e33 / Aborted`. Ventoy sem `ventoy.json` e tema leve: menu aparece. Causa encontrada por eliminação (ver abaixo); correção **aguardando reteste** |
 | Secure Boot | **Não testado** / Dependente de hardware físico |
 | Resoluções, pouca RAM, HD/SSD/NVMe | **Não testado** / Dependente de hardware físico |
 | Boot de cada ferramenta pelo Ventoy | **Não testado** (nenhuma ISO real baixada) |
+
+**Primeiro boot real — diagnóstico do `unaligned pointer`**
+
+Por eliminação, com variantes do `ventoy.json`: Ventoy puro funciona; controle, nomes,
+ícones e dicas funcionam isolados; o tema leve funciona; o tema principal falha mesmo
+sozinho, com fundo RGB ou RGBA. Causa: posições com casa decimal (`left = 5.5%`,
+`width = 60.5%` no tema e `"left": "5.5%"` no `menu_tip`). O GRUB lê posições com
+`grub_strtoul` (`parse_proportional_spec`, `gfxmenu/theme_loader.c`), que só aceita inteiros;
+o erro de leitura leva o Ventoy a abortar. Correção: valores inteiros (`6%`, `60%`) e o
+validador passa a recusar decimais (antes os aceitava).
 
 ## 4. Windows Optimizer
 

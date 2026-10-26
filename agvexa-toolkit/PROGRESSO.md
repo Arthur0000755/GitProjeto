@@ -9,7 +9,7 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 | A — Pesquisa e arquitetura | ✅ concluída (Ventoy 1.1.18 confirmado no código-fonte; `docs/arquitetura.md`) |
 | B — Personalização visual | ✅ concluída (temas `agvexa` e `agvexa-lite`, 18 ícones, fundos; renderização real **não testada**) |
 | C — Biblioteca e preparação | ✅ concluída (catálogo, manifesto, verificação SHA‑256, staging) |
-| D — Testes automatizados | ✅ concluída para o disponível (93 testes unitários + 22 verificações; VM/pwsh/shellcheck indisponíveis) |
+| D — Testes automatizados | ✅ concluída para o disponível (96 testes unitários + 22 verificações; VM/pwsh/shellcheck indisponíveis) |
 | E — Documentação e entrega | ✅ concluída (manual, procedimentos, checklists, relatórios) |
 | Complemento — Windows Optimizer | ✅ implementado; autoteste aprovado no Windows 10 LTSC 17763 como admin e como usuário comum (38/0; 39/0 após a correção do `-WhatIf`); faltam W‑1 a W‑13 em VM |
 | F — Instalação no HD real | ⛔ NÃO executada (aguarda autorização) |
@@ -56,6 +56,7 @@ Arquivo para retomar o desenvolvimento em outra conversa. Atualize a cada fase.
 - 2026-10-15 — logomarca oficial integrada ao tema do boot, papéis de parede e relatório do Optimizer.
 - 2026-10-21 — guia `docs/uso-no-windows.md` (estação Windows 10 Enterprise LTSC: Ventoy2Disk.exe, cópia, conferência, autoteste do Optimizer).
 - 2026-10-15 — decisão de discos: 320 GB = toolkit; 1 TB = arquivo criptografado da empresa com backups de clientes.
+- 2026-10-26 — 1º boot real (notebook STI 1414, BIOS legado, Ventoy 1.1.17): tema principal abortava (`unaligned pointer`); causa: posições decimais no tema; corrigido, aguardando reteste.
 - 2026-10-23 — 1º autoteste do Optimizer em Windows real (LTSC build 17763): 36 ok / 8 falhas; causas corrigidas e reexecução aprovada (38 ok / 0 falhas).
 - 2026-10-21 — verificador da cópia por duplo clique (`VERIFICAR-COPIA.cmd` + `AGVexa\Verificar-Copia.ps1`).
 - 2026-10-15 — pastas de apoio (DRIVERS, INSTALADORES, FERRAMENTAS, BIOS_FIRMWARE) e política de dados de clientes fora da mídia.

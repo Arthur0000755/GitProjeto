@@ -100,6 +100,10 @@ class VentoyConfigTests(unittest.TestCase):
         cfg = dict(self.base, menu_alias=[{"dir": "/ISO/01/", "alias": "x"}])
         self.assertTrue(self.validate(cfg).errors)
 
+    def test_menu_tip_decimal_position_rejected(self):
+        cfg = dict(self.base, menu_tip=dict(self.base["menu_tip"], left="5.5%"))
+        self.assertTrue(any("menu_tip.left" in e for e in self.validate(cfg).errors))
+
     def test_alias_too_long_rejected(self):
         cfg = dict(self.base, menu_alias=[{"dir": "/ISO/x", "alias": "é" * 200}])
         self.assertTrue(self.validate(cfg).errors)

@@ -17,9 +17,9 @@ message-bg-color: "#111C30"
 terminal-box: "terminal_box_*.png"
 
 + boot_menu {
-  left = 5.5%
+  left = 6%
   top = 26%
-  width = 60.5%
+  width = 60%
   height = 55%
 
   menu_pixmap_style = "menu_*.png"
@@ -56,7 +56,7 @@ terminal-box: "terminal_box_*.png"
 
 # Linha de atalhos do Ventoy (texto traduzido pelo próprio Ventoy)
 + hbox {
-  left = 5.5%
+  left = 6%
   top = 90%
   width = 60%
   height = 20

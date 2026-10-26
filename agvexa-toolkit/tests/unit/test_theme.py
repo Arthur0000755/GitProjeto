@@ -61,6 +61,17 @@ class ThemeTests(unittest.TestCase):
         r = self.theme('desktop-color: "#0B1220"\n+ boot_menu { left = 10% top = 10% width = 80% height = 80% }\n')
         self.assertEqual(r.errors, [])
 
+    def test_decimal_position_rejected(self):
+        # GRUB lê posições com grub_strtoul: "5.5%" aborta o Ventoy ("unaligned pointer").
+        r = self.theme('desktop-color: "#0B1220"\n+ boot_menu { left = 5.5% top = 10% width = 80% height = 80% }\n')
+        self.assertTrue(any("posição inválida" in e for e in r.errors))
+
+    def test_grub_position_formats(self):
+        for ok in ("6%", "95%-25", "30%+200", "55", "-10"):
+            self.assertTrue(agvexa.valid_grub_position(ok), ok)
+        for bad in ("5.5%", "60.5%", "10 %", "abc", ""):
+            self.assertFalse(agvexa.valid_grub_position(bad), bad)
+
     def test_missing_boot_menu(self):
         self.assertTrue(self.theme('desktop-color: "#000000"\n').errors)
 

@@ -259,7 +259,7 @@ def build_ventoy_config(categories, images=None, ascii_only=False):
         },
         "menu_alias": [],
         "menu_class": [],
-        "menu_tip": {"left": "5.5%", "top": "83%", "color": "#94A3B8", "tips": []},
+        "menu_tip": {"left": "6%", "top": "83%", "color": "#94A3B8", "tips": []},
     }
     for c in cats:
         d = "%s/%s" % (root, c["id"])
@@ -468,8 +468,8 @@ def validate_ventoy_json(path, media_root, report, theme_root=None, strict_image
                     if k in t and len(t[k]) > 90:
                         report.warn("dica com mais de 90 caracteres pode ser cortada na tela: %s" % p)
             for k in ("left", "top"):
-                if k in tips and not re.fullmatch(r"\d+(\.\d+)?%([+-]\d+)?|\d+", str(tips[k])):
-                    report.error("menu_tip.%s em formato inesperado: %s" % (k, tips[k]))
+                if k in tips and not valid_grub_position(str(tips[k])):
+                    report.error("menu_tip.%s inválido (GRUB só aceita inteiros, ex.: 6%% ou 80%%+5): %s" % (k, tips[k]))
 
     # ícones para todas as classes, em todos os temas
     for tf in theme_files:
@@ -574,6 +574,15 @@ def parse_theme(text):
     return globals_, comps, errors
 
 
+def valid_grub_position(value):
+    """Posição/tamanho no formato do GRUB: inteiros, com % e somas (ex.: 6%, 80%+5, 95%-25).
+
+    parse_proportional_spec (gfxmenu/theme_loader.c) usa grub_strtoul: "5.5%" vira erro
+    "unrecognized number" e, no Ventoy, o tema aborta com "unaligned pointer".
+    """
+    return bool(re.fullmatch(r"[+-]?\d+%?([+-]\d+%?)*", value.strip()))
+
+
 def valid_color(value):
     return bool(re.fullmatch(r"#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?|#[0-9A-Fa-f]{3}", value)) or value in COLOR_NAMES
 
@@ -621,8 +630,8 @@ def validate_theme(theme_txt, report, expected_version=None):
                 report.error("%s: cor inválida %s=%s em %s" % (rel(theme_txt), k, v, t))
             if k.endswith("pixmap_style") or k in ("scrollbar_thumb", "scrollbar_frame"):
                 styles.append(v)
-            if k in ("left", "top", "width", "height") and not re.fullmatch(r"[0-9.%+\-]+", v):
-                report.error("%s: posição inválida %s=%s" % (rel(theme_txt), k, v))
+            if k in ("left", "top", "width", "height") and not valid_grub_position(v):
+                report.error("%s: posição inválida %s=%s (GRUB só aceita inteiros, ex.: 6%% ou 95%%-25)" % (rel(theme_txt), k, v))
         if t == "label":
             labels.append(comp["props"].get("text", ""))
         if t == "image" and "file" in comp["props"]:
