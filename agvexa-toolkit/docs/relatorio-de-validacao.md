@@ -45,12 +45,12 @@ Testes unitários:
 
 | Cenário | Resultado |
 |---|---|
-| Renderização real do tema no GRUB/Ventoy | **Não testado** — a prévia em `docs/previews/` é uma simulação Pillow |
+| Renderização real do tema no GRUB/Ventoy | **Testado e aprovado** (2026-10-26, BIOS legado, notebook STI 1414, Ventoy 1.1.17, após a correção): logo, painéis "Como usar"/"Antes de qualquer reparo", atalhos em português e rodapé "Toolkit 0.1.0-rc1 \| Ventoy 1.1.17" |
 | UEFI x86_64 | **Não testado** / Dependente de hardware físico |
-| BIOS legado — notebook STI 1414, Ventoy 1.1.17 e 1.1.18 (2026-10-26) | **Falhou** com o tema principal: `unaligned pointer 0x15e33 / Aborted`. Ventoy sem `ventoy.json` e tema leve: menu aparece. Causa encontrada por eliminação (ver abaixo); correção **aguardando reteste** |
+| BIOS legado — notebook STI 1414, Ventoy 1.1.17 e 1.1.18 (2026-10-26) | **Falhou** com o tema principal: `unaligned pointer 0x15e33 / Aborted`. Ventoy sem `ventoy.json` e tema leve: menu aparece. Causa encontrada por eliminação (ver abaixo); corrigido e **retestado: aprovado** — menu AG Vexa, F5 e F6 funcionando |
 | Secure Boot | **Não testado** / Dependente de hardware físico |
 | Resoluções, pouca RAM, HD/SSD/NVMe | **Não testado** / Dependente de hardware físico |
-| Boot de cada ferramenta pelo Ventoy | **Não testado** (nenhuma ISO real baixada) |
+| Boot de cada ferramenta pelo Ventoy | **Não testado** — no teste só havia uma ISO de teste (MemTest86 4.3.7, PassMark); o boot dela não foi registrado |
 
 **Primeiro boot real — diagnóstico do `unaligned pointer`**
 
